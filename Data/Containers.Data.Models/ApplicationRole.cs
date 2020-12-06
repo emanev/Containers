@@ -3,8 +3,8 @@ namespace Containers.Data.Models
 {
     using System;
 
-    using Containers.Data.Common.Models;
-
+    //using Containers.Data.Common.Models;
+    using global::Containers.Data.Common.Models;
     using Microsoft.AspNetCore.Identity;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
