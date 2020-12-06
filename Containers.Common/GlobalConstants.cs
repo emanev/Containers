@@ -4,6 +4,6 @@
     {
         public const string SystemName = "Containers";
 
-        public const string AdministratorRoleName = "Administrator";    //fghfghjjj
+        public const string AdministratorRoleName = "Administrator";
     }
 }

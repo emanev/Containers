@@ -1,7 +1,7 @@
 ﻿namespace Containers.Data.Models
 {
     using System;
-    using System.Collections.Generic;
+
     public partial class Schedule
     {
         public int Id { get; set; }
