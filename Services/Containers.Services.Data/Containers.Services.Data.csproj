@@ -21,7 +21,12 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Data\Containers.Data.Common\Containers.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Containers.Data.Models\Containers.Data.Models.csproj" />
+    <ProjectReference Include="..\..\Web\Containers.Web.ViewModels\Containers.Web.ViewModels.csproj" />
     <ProjectReference Include="..\Containers.Services.Mapping\Containers.Services.Mapping.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

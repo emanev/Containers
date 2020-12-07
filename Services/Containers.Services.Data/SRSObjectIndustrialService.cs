@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    using Containers.Services.Data.Models;
+    using Containers.Web.ViewModels.SRSObjects.Industrial;
 
     public class SRSObjectIndustrialService : ISRSObjectIndustrialService
     {

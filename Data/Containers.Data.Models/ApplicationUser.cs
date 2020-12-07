@@ -3,7 +3,7 @@ namespace Containers.Data.Models
 {
     using System;
     using System.Collections.Generic;
-        
+
     using global::Containers.Data.Common.Models;
     using Microsoft.AspNetCore.Identity;
 

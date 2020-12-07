@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    using Containers.Services.Data.Models;
+    using Containers.Web.ViewModels.Warehouses;
 
     public class WarehouseService : IWarehouseService
     {
@@ -14,6 +14,11 @@
         }
 
         public IEnumerable<WarehouseViewModel> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task UpdateAsync(int id, WarehouseViewModel input)
         {
             throw new NotImplementedException();
         }

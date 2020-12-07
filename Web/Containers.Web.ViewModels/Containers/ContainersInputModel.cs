@@ -1,8 +1,8 @@
-﻿namespace Containers.Services.Data.Models
+﻿namespace Containers.Web.ViewModels.Containers
 {
     using System.ComponentModel.DataAnnotations;
 
-    using Containers.Data.Models;
+    using global::Containers.Data.Models;
 
     public class ContainersInputModel
     {

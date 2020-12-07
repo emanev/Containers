@@ -1,6 +1,5 @@
-﻿namespace Containers.Services.Data.Models
+﻿namespace Containers.Web.ViewModels.Warehouses
 {
-
     public class WarehouseEditModel
     {
     }

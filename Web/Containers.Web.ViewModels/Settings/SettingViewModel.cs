@@ -1,9 +1,8 @@
 ﻿namespace Containers.Web.ViewModels.Settings
 {
-    using Containers.Data.Models;
-    using Containers.Services.Mapping;
-
     using AutoMapper;
+    using global::Containers.Data.Models;
+    using global::Containers.Services.Mapping;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {

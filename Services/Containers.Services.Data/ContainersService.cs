@@ -6,7 +6,7 @@
 
     using Containers.Data.Common.Repositories;
     using Containers.Data.Models;
-    using Containers.Services.Data.Models;
+    using Containers.Web.ViewModels.Containers;
 
     public class ContainersService : IContainersService
     {

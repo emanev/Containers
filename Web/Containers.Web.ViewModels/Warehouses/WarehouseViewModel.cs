@@ -1,4 +1,4 @@
-﻿namespace Containers.Services.Data.Models
+﻿namespace Containers.Web.ViewModels.Warehouses
 {
     using System.ComponentModel.DataAnnotations;
 

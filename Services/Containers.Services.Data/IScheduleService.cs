@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    using Containers.Services.Data.Models;
+    using Containers.Web.ViewModels.Schedules;
 
     public interface IScheduleService
     {

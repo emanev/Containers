@@ -1,10 +1,9 @@
 ﻿namespace Containers.Services.Data
 {
     using System.Collections.Generic;
-
     using System.Threading.Tasks;
 
-    using Containers.Services.Data.Models;
+    using Containers.Web.ViewModels.Containers;
 
     public interface IContainersService
     {
