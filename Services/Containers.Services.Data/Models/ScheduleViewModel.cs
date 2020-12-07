@@ -1,11 +1,11 @@
-﻿namespace Containers.Data.Models
+﻿namespace Containers.Services.Data.Models
 {
     using System;
 
-    using Containers.Data.Common.Models;
-
-    public class Schedule : BaseDeletableModel<int>
+    public class ScheduleViewModel
     {
+        public int Id { get; set; }
+
         public string Description { get; set; }
 
         public int ObjectTypeId { get; set; }
@@ -21,13 +21,5 @@
         public TimeSpan RaiseTimeFrom { get; set; }
 
         public TimeSpan RaiseTimeTo { get; set; }
-
-        public virtual City City { get; set; }
-
-        public virtual District District { get; set; }
-
-        public virtual ObjectType ObjectType { get; set; }
-
-        public virtual SrsobjectIndustrial Srsobject { get; set; }
     }
 }

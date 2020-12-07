@@ -2,15 +2,15 @@
 {
     using System.Collections.Generic;
 
-    public partial class Container
+    using Containers.Data.Common.Models;
+
+    public class Container : BaseDeletableModel<int>
     {
         public Container()
         {
             this.Movement = new HashSet<Movement>();
             this.SrsobjectIndustrialContainer = new HashSet<SrsobjectIndustrialContainer>();
         }
-
-        public int Id { get; set; }
 
         public string InventarNumber { get; set; }
 

@@ -6,7 +6,6 @@
     {
         public City()
         {
-            this.District = new HashSet<District>();
             this.Schedule = new HashSet<Schedule>();
             this.Warehouse = new HashSet<Warehouse>();
         }
@@ -16,8 +15,6 @@
         public string Name { get; set; }
 
         public int DistrictId { get; set; }
-
-        public virtual ICollection<District> District { get; set; }
 
         public virtual ICollection<Schedule> Schedule { get; set; }
 
