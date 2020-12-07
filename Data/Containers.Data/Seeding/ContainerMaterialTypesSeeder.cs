@@ -15,9 +15,9 @@
                 return;
             }
 
-            await dbContext.ContainerMaterialTypes.AddAsync(new ContainerMaterialType { Name = "жълт" });
-            await dbContext.ContainerMaterialTypes.AddAsync(new ContainerMaterialType { Name = "зелен" });
-            await dbContext.ContainerMaterialTypes.AddAsync(new ContainerMaterialType { Name = "син" });
+            await dbContext.ContainerMaterialTypes.AddAsync(new ContainerMaterialType { Name = "стъкло" });
+            await dbContext.ContainerMaterialTypes.AddAsync(new ContainerMaterialType { Name = "пластмаса" });
+            await dbContext.ContainerMaterialTypes.AddAsync(new ContainerMaterialType { Name = "хартия" });
 
             await dbContext.SaveChangesAsync();
         }
