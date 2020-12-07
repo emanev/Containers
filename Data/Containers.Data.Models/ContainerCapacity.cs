@@ -6,13 +6,13 @@
     {
         public ContainerCapacity()
         {
-            this.Containers = new HashSet<Containers>();
+            this.Containers = new HashSet<Container>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public virtual ICollection<Containers> Containers { get; set; }
+        public virtual ICollection<Container> Containers { get; set; }
     }
 }

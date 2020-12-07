@@ -15,7 +15,7 @@
 
         public string AddedByUserId { get; set; }
 
-        public virtual Containers Container { get; set; }
+        public virtual Container Container { get; set; }
 
         public virtual Movement Movement { get; set; }
 

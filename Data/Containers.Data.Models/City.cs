@@ -15,6 +15,8 @@
 
         public string Name { get; set; }
 
+        public int DistrictId { get; set; }
+
         public virtual ICollection<District> District { get; set; }
 
         public virtual ICollection<Schedule> Schedule { get; set; }

@@ -26,7 +26,7 @@
 
         public virtual District District { get; set; }
 
-        public virtual ObjectTypes ObjectType { get; set; }
+        public virtual ObjectType ObjectType { get; set; }
 
         public virtual SrsobjectIndustrial Srsobject { get; set; }
     }

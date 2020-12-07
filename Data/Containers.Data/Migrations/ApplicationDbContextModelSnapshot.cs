@@ -15,7 +15,7 @@ namespace Containers.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.0")
+                .HasAnnotation("ProductVersion", "3.1.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -139,6 +139,222 @@ namespace Containers.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Containers.Data.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.Container", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ContainerCapacityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContainerColourId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContainerMaterialTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InventarNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ContainerCapacityId");
+
+                    b.HasIndex("ContainerColourId");
+
+                    b.HasIndex("ContainerMaterialTypeId");
+
+                    b.ToTable("Container");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.ContainerCapacity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContainerCapacities");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.ContainerColour", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContainerColours");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.ContainerMaterialType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContainerMaterialTypes");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.District", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("Districts");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.Movement", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ContainerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsLastMovement")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("WarehouseFromId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WarehouseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WarehouseId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WarehouseToId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("ContainerId");
+
+                    b.HasIndex("WarehouseId");
+
+                    b.HasIndex("WarehouseId1");
+
+                    b.ToTable("Movements");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.ObjectType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ObjectTypes");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ObjectTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RaiseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<TimeSpan>("RaiseTimeFrom")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("RaiseTimeTo")
+                        .HasColumnType("time");
+
+                    b.Property<int>("SrsobjectId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("ObjectTypeId");
+
+                    b.HasIndex("SrsobjectId");
+
+                    b.ToTable("Schedules");
+                });
+
             modelBuilder.Entity("Containers.Data.Models.Setting", b =>
                 {
                     b.Property<int>("Id")
@@ -169,6 +385,148 @@ namespace Containers.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.SrsobjectIndustrial", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("SrsobjectIndustrials");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.SrsobjectIndustrialContainer", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("ContainerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MovementId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SrsobjectIndustrialId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("ContainerId");
+
+                    b.HasIndex("MovementId");
+
+                    b.HasIndex("SrsobjectIndustrialId");
+
+                    b.ToTable("SrsobjectIndustrialContainers");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.SrsobjectIndustrialSchema", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime?>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Hour")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<int>("SrsobjectIndustrialId")
+                        .HasColumnType("int");
+
+                    b.Property<byte>("WeekDay")
+                        .HasColumnType("tinyint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("SrsobjectIndustrialId");
+
+                    b.ToTable("SrsobjectIndustrialSchemas");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.Warehouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddedByUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContactPerson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("Warehouses");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -273,6 +631,152 @@ namespace Containers.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.Container", b =>
+                {
+                    b.HasOne("Containers.Data.Models.ContainerCapacity", "ContainerCapacity")
+                        .WithMany("Containers")
+                        .HasForeignKey("ContainerCapacityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.ContainerColour", "ContainerColour")
+                        .WithMany("Containers")
+                        .HasForeignKey("ContainerColourId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.ContainerMaterialType", "ContainerMaterialType")
+                        .WithMany("Containers")
+                        .HasForeignKey("ContainerMaterialTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.District", b =>
+                {
+                    b.HasOne("Containers.Data.Models.City", null)
+                        .WithMany("District")
+                        .HasForeignKey("CityId");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.Movement", b =>
+                {
+                    b.HasOne("Containers.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("Containers.Data.Models.Container", "Container")
+                        .WithMany("Movement")
+                        .HasForeignKey("ContainerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.Warehouse", null)
+                        .WithMany("MovementWarehouseFrom")
+                        .HasForeignKey("WarehouseId");
+
+                    b.HasOne("Containers.Data.Models.Warehouse", null)
+                        .WithMany("MovementWarehouseTo")
+                        .HasForeignKey("WarehouseId1");
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.Schedule", b =>
+                {
+                    b.HasOne("Containers.Data.Models.City", "City")
+                        .WithMany("Schedule")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.District", "District")
+                        .WithMany("Schedule")
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.ObjectType", "ObjectType")
+                        .WithMany("Schedule")
+                        .HasForeignKey("ObjectTypeId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.SrsobjectIndustrial", "Srsobject")
+                        .WithMany("Schedule")
+                        .HasForeignKey("SrsobjectId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.SrsobjectIndustrial", b =>
+                {
+                    b.HasOne("Containers.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("Containers.Data.Models.District", "District")
+                        .WithMany("SrsobjectIndustrial")
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.SrsobjectIndustrialContainer", b =>
+                {
+                    b.HasOne("Containers.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("Containers.Data.Models.Container", "Container")
+                        .WithMany("SrsobjectIndustrialContainer")
+                        .HasForeignKey("ContainerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.Movement", "Movement")
+                        .WithMany("SrsobjectIndustrialContainer")
+                        .HasForeignKey("MovementId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.SrsobjectIndustrial", "SrsobjectIndustrial")
+                        .WithMany("SrsobjectIndustrialContainer")
+                        .HasForeignKey("SrsobjectIndustrialId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.SrsobjectIndustrialSchema", b =>
+                {
+                    b.HasOne("Containers.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("Containers.Data.Models.SrsobjectIndustrial", "SrsobjectIndustrial")
+                        .WithMany("SrsobjectIndustrialSchema")
+                        .HasForeignKey("SrsobjectIndustrialId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Containers.Data.Models.Warehouse", b =>
+                {
+                    b.HasOne("Containers.Data.Models.ApplicationUser", "AddedByUser")
+                        .WithMany()
+                        .HasForeignKey("AddedByUserId");
+
+                    b.HasOne("Containers.Data.Models.City", "City")
+                        .WithMany("Warehouse")
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Containers.Data.Models.District", "District")
+                        .WithMany("Warehouse")
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

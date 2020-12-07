@@ -24,6 +24,30 @@
         {
         }
 
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<District> Districts { get; set; }
+
+        public DbSet<ContainerCapacity> ContainerCapacities { get; set; }
+
+        public DbSet<ContainerColour> ContainerColours { get; set; }
+
+        public DbSet<ContainerMaterialType> ContainerMaterialTypes { get; set; }
+
+        public DbSet<Movement> Movements { get; set; }
+
+        public DbSet<ObjectType> ObjectTypes { get; set; }
+
+        public DbSet<Schedule> Schedules { get; set; }
+
+        public DbSet<SrsobjectIndustrial> SrsobjectIndustrials { get; set; }
+
+        public DbSet<SrsobjectIndustrialContainer> SrsobjectIndustrialContainers { get; set; }
+
+        public DbSet<SrsobjectIndustrialSchema> SrsobjectIndustrialSchemas { get; set; }
+
+        public DbSet<Warehouse> Warehouses { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);

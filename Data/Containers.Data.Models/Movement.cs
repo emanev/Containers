@@ -22,15 +22,11 @@
 
         public DateTime? EntryDate { get; set; }
 
-        public virtual Containers Container { get; set; }
+        public virtual Container Container { get; set; }
 
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
-
-        public virtual Warehouse WarehouseFrom { get; set; }
-
-        public virtual Warehouse WarehouseTo { get; set; }
 
         public virtual ICollection<SrsobjectIndustrialContainer> SrsobjectIndustrialContainer { get; set; }
     }

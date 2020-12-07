@@ -27,6 +27,12 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
+                              new DistrictsSeeder(),
+                              new CitiesSeeder(),
+                              new ContainerCapacitiesSeeder(),
+                              new ContainerMaterialTypesSeeder(),
+                              new ContainerColoursSeeder(),
+                              new ObjectTypesSeeder(),
                           };
 
             foreach (var seeder in seeders)
