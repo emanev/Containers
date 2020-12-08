@@ -21,12 +21,21 @@
         {
             var container = new Container
             {
-                ContainerCapacityId = input.CapacityId,
-                ContainerColourId = input.ColourId,
+                ContainerCapacityId = (int)input.ContainerCapacity,
+                ContainerColourId = (int)input.ContainerColour,
                 InventarNumber = input.InventarNumber,
             };
 
             await this.containersRepository.AddAsync(container);
+            await this.containersRepository.SaveChangesAsync();
+        }
+
+        public async Task UpdateAsync(int id, ContainersInputModel input)
+        {
+            var container = this.containersRepository.All().FirstOrDefault(x => x.Id == id);
+            container.InventarNumber = input.InventarNumber;
+            container.ContainerColourId = (int)input.ContainerColour;
+            container.ContainerCapacityId = (int)input.ContainerCapacity;
             await this.containersRepository.SaveChangesAsync();
         }
 
@@ -35,12 +44,40 @@
             var containers = this.containersRepository.AllAsNoTracking()
                 .Select(x => new ContainersViewModel
             {
+                Id = x.Id,
                 InventarNumber = x.InventarNumber,
-                ContainerCapacityType = x.ContainerCapacity,
-                ContainerColourType = x.ContainerColour,
+                ContainerColourId = x.ContainerColourId,
+                ContainerColour = (Enums.ContainerColour)x.ContainerColourId,
+                ContainerCapacityId = x.ContainerCapacityId,
+                ContainerCapacity = (Enums.ContainerCapacity)x.ContainerCapacityId,
             }).ToList();
 
             return containers;
+        }
+
+        public ContainersViewModel GetById(int id)
+        {
+            var container = this.containersRepository.AllAsNoTracking()
+                .Where(x => x.Id == id)
+                 .Select(x => new ContainersViewModel
+                 {
+                     Id = x.Id,
+                     InventarNumber = x.InventarNumber,
+                     ContainerColourId = x.ContainerColourId,
+                     ContainerColour = (Enums.ContainerColour)x.ContainerColourId,
+                     ContainerCapacityId = x.ContainerCapacityId,
+                     ContainerCapacity = (Enums.ContainerCapacity)x.ContainerCapacityId,
+                 })
+                .FirstOrDefault();
+
+            return container;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var container = this.containersRepository.All().FirstOrDefault(x => x.Id == id);
+            this.containersRepository.Delete(container);
+            await this.containersRepository.SaveChangesAsync();
         }
     }
 }

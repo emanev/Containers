@@ -10,16 +10,31 @@
 
 <h1>@this.ViewData["Title"]</h1>
 <hr />
-<div class="row">    
-    @foreach (var container in this.Model.Containers)
-    {
-        <div class="media col-md-4">
-            <div class="media-body">
-                <h5 class="mt-0"><a asp-action="ById" asp-route-id="@container.Id">@container.InventarNumber</a></h5>
-                @container.InventarNumber
-            </div>
-        </div>
-    }
+
+<div class="container">    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Inventar number</th>
+                <th>Colour</th>
+                <th>Capacity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var container in this.Model.Containers)
+            {
+            <tr>
+                <td>@container.InventarNumber</td>
+                <td>@container.ContainerColour</td>
+                <td>@container.ContainerCapacity</td>
+                <td><a asp-action="Delete" asp-route-id="@container.Id">Delete</a></td>
+                Delete
+            </tr>
+            }          
+        </tbody>
+    </table>
 </div>
+
 <hr />
-<partial name="_PagingPartial" model="@Model" />
+@*<partial name="_PagingPartial" model="@Model" />*@

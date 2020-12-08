@@ -10,8 +10,12 @@
 
         public string InventarNumber { get; set; }
 
-        public ContainerColour ContainerColourType { get; set; }
+        public int ContainerColourId { get; set; }
 
-        public ContainerCapacity ContainerCapacityType { get; set; }
+        public int ContainerCapacityId { get; set; }
+
+        public Enums.ContainerColour ContainerColour { get; set; }
+
+        public Enums.ContainerCapacity ContainerCapacity { get; set; }
     }
 }

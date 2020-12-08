@@ -11,13 +11,25 @@
         [MaxLength(50)]
         public string InventarNumber { get; set; }
 
-        public int ColourId { get; set; }
+        [EnumDataType(typeof(Enums.ContainerColour))]
+        //[Display(Name = "Colour Type:")]
+        public Enums.ContainerColour ContainerColour { get; set; }
 
-        public int CapacityId { get; set; }
+        [EnumDataType(typeof(Enums.ContainerCapacity))]
+        //[Display(Name = "Capacity Type:")]
+        public Enums.ContainerCapacity ContainerCapacity { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> ContainersColourItems { get; set; }
+        //[Required]
+        //[MaxLength(50)]
+        //public string InventarNumber { get; set; }
 
-        public IEnumerable<KeyValuePair<string, string>> ContainersCapacityItems { get; set; }
+        //public int ColourId { get; set; }
+
+        //public int CapacityId { get; set; }
+
+        //public IEnumerable<KeyValuePair<string, string>> ContainersColourItems { get; set; }
+
+        //public IEnumerable<KeyValuePair<string, string>> ContainersCapacityItems { get; set; }
 
         //[EnumDataType(typeof(ContainerColour))]
         //[Display(Name = "Colour Type:")]

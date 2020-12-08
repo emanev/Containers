@@ -11,31 +11,46 @@
     public class ContainersController : BaseController
     {
         private readonly IContainersService containersService;
-        private readonly IContainersColourService containersColourService;
-        private readonly IContainersCapacityService containersCapacityService;
 
-        public ContainersController(
-            IContainersService containersService,
-            IContainersColourService containersColourService,
-            IContainersCapacityService containersCapacityService)
+        public ContainersController(IContainersService containersService)
         {
             this.containersService = containersService;
-            this.containersColourService = containersColourService;
-            this.containersCapacityService = containersCapacityService;
         }
 
         public IActionResult All()
         {
-            // TO DO  NullRefenece Exception  model is null
-            return this.View();
+            var viewModel = new ContainersListViewModel
+            {
+                Containers = this.containersService.GetAll(),
+            };
+            return this.View(viewModel);
         }
 
+        public IActionResult ById(int id)
+        {
+            var container = this.containersService.GetById(id);
+            return this.View(container);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var container = this.containersService.GetById(id);
+            return this.View(container);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await this.containersService.DeleteAsync(id);
+            return this.RedirectToAction(nameof(this.All));
+        }
+
+        [Authorize]
         public IActionResult Create()
         {
-            var viewModel = new ContainersInputModel();
-            viewModel.ContainersColourItems = this.containersColourService.GetAllAsKeyValuePairs();
-            viewModel.ContainersCapacityItems = this.containersCapacityService.GetAllAsKeyValuePairs();
-            return this.View(viewModel);
+            return this.View();
         }
 
         [HttpPost]
@@ -51,7 +66,7 @@
 
                 await this.containersService.CreateAsync(model);
 
-                this.TempData["Message"] = "Recipe added successfully.";
+                this.TempData["Message"] = "Container added successfully.";
 
                 return this.RedirectToAction("All");
             }

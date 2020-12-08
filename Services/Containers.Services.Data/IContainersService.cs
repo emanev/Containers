@@ -10,5 +10,9 @@
         Task CreateAsync(ContainersInputModel model);
 
         IEnumerable<ContainersViewModel> GetAll();
+
+        ContainersViewModel GetById(int id);
+
+        Task DeleteAsync(int id);
     }
 }
