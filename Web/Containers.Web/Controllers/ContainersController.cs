@@ -5,21 +5,37 @@
 
     using Containers.Services.Data;
     using Containers.Web.ViewModels.Containers;
-    using Microsoft.AspNetCore.Authorization;    
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class ContainersController : BaseController
     {
         private readonly IContainersService containersService;
+        private readonly IContainersColourService containersColourService;
+        private readonly IContainersCapacityService containersCapacityService;
 
-        public ContainersController(IContainersService containersService)
+        public ContainersController(
+            IContainersService containersService,
+            IContainersColourService containersColourService,
+            IContainersCapacityService containersCapacityService)
         {
             this.containersService = containersService;
+            this.containersColourService = containersColourService;
+            this.containersCapacityService = containersCapacityService;
         }
 
         public IActionResult All()
         {
+            // TO DO  NullRefenece Exception  model is null
             return this.View();
+        }
+
+        public IActionResult Create()
+        {
+            var viewModel = new ContainersInputModel();
+            viewModel.ContainersColourItems = this.containersColourService.GetAllAsKeyValuePairs();
+            viewModel.ContainersCapacityItems = this.containersCapacityService.GetAllAsKeyValuePairs();
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -34,6 +50,9 @@
                 }
 
                 await this.containersService.CreateAsync(model);
+
+                this.TempData["Message"] = "Recipe added successfully.";
+
                 return this.RedirectToAction("All");
             }
             catch (Exception ex)

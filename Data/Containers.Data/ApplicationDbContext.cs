@@ -32,8 +32,6 @@
 
         public DbSet<ContainerColour> ContainerColours { get; set; }
 
-        public DbSet<ContainerMaterialType> ContainerMaterialTypes { get; set; }
-
         public DbSet<Movement> Movements { get; set; }
 
         public DbSet<ObjectType> ObjectTypes { get; set; }

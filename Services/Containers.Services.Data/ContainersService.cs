@@ -21,8 +21,8 @@
         {
             var container = new Container
             {
-                ContainerCapacity = input.ContainerCapacityType,
-                ContainerColour = input.ContainerColourType,
+                ContainerCapacityId = input.CapacityId,
+                ContainerColourId = input.ColourId,
                 InventarNumber = input.InventarNumber,
             };
 

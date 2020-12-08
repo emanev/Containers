@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public partial class ContainerColour
+    using Containers.Data.Common.Models;
+
+    public class ContainerColour
     {
         public ContainerColour()
         {

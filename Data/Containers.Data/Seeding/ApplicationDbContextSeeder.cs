@@ -30,7 +30,6 @@
                               new DistrictsSeeder(),
                               new CitiesSeeder(),
                               new ContainerCapacitiesSeeder(),
-                              new ContainerMaterialTypesSeeder(),
                               new ContainerColoursSeeder(),
                               new ObjectTypesSeeder(),
                           };

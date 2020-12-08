@@ -6,17 +6,12 @@
 
     public class ContainersViewModel
     {
-        [Required]
-        [MaxLength(50)]
-        [Display(Name = "Inventar Number")]
+        public int Id { get; set; }
+
         public string InventarNumber { get; set; }
 
-        [EnumDataType(typeof(ContainerColour))]
-        [Display(Name = "Colour Type")]
         public ContainerColour ContainerColourType { get; set; }
 
-        [EnumDataType(typeof(ContainerCapacity))]
-        [Display(Name = "Capacity Type")]
         public ContainerCapacity ContainerCapacityType { get; set; }
     }
 }

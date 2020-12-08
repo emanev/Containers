@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public partial class ContainerCapacity
+    using Containers.Data.Common.Models;
+
+    public class ContainerCapacity
     {
         public ContainerCapacity()
         {

@@ -1,0 +1,30 @@
+﻿@model Containers.Web.ViewModels.Containers.ContainersInputModel
+@{
+    this.ViewData["Title"] = "Add new container";
+    var containersColourItems = this.Model.ContainersColourItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var containersCapacityItems = this.Model.ContainersCapacityItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<form method="post" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="InventarNumber"></label>
+        <input asp-for="InventarNumber" class="form-control" />
+        <span asp-validation-for="InventarNumber" class="text-danger"></span>
+    </div>   
+    <div class="form-group">
+        <label asp-for="ColourId"></label>
+        @*<vc:CategoriesDropDown name="CategoryId"></vc:CategoriesDropDown>*@
+        <select asp-for="ColourId" class="form-control" asp-items="containersColourItems"></select>
+        <span asp-validation-for="ColourId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CapacityId"></label>
+        @*<vc:CategoriesDropDown name="CategoryId"></vc:CategoriesDropDown>*@
+        <select asp-for="CapacityId" class="form-control" asp-items="containersCapacityItems"></select>
+        <span asp-validation-for="CapacityId" class="text-danger"></span>
+    </div> 
+    <input type="submit" class="btn btn-primary" />
+</form>

@@ -1,0 +1,25 @@
+﻿@model Containers.Web.ViewModels.Containers.ContainersListViewModel
+@{
+    this.ViewData["Title"] = "All Containers";   //, page " + Model.PageNumber;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+<div class="row">    
+    @foreach (var container in this.Model.Containers)
+    {
+        <div class="media col-md-4">
+            <div class="media-body">
+                <h5 class="mt-0"><a asp-action="ById" asp-route-id="@container.Id">@container.InventarNumber</a></h5>
+                @container.InventarNumber
+            </div>
+        </div>
+    }
+</div>
+<hr />
+<partial name="_PagingPartial" model="@Model" />
