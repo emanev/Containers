@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
 
+    using Containers.Data.Common.Models;
+
     public partial class Movement
     {
         public Movement()

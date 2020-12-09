@@ -7,10 +7,12 @@
 
     public interface IWarehouseService
     {
-        Task CreateAsync(WarehouseViewModel model);
+        Task CreateAsync(WarehouseInputModel model, string userId);
 
         Task UpdateAsync(int id, WarehouseViewModel input);
 
         IEnumerable<WarehouseViewModel> GetAll();
+
+        WarehouseViewModel GetById(int id);
     }
 }
