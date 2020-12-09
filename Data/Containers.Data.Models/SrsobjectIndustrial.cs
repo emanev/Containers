@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
 
-    public partial class SrsobjectIndustrial
+    using Containers.Data.Common.Models;
+
+    public class SrsobjectIndustrial : BaseDeletableModel<int>
     {
         public SrsobjectIndustrial()
         {
@@ -11,8 +13,6 @@
             this.SrsobjectIndustrialContainer = new HashSet<SrsobjectIndustrialContainer>();
             this.SrsobjectIndustrialSchema = new HashSet<SrsobjectIndustrialSchema>();
         }
-
-        public int Id { get; set; }
 
         public string Name { get; set; }
 

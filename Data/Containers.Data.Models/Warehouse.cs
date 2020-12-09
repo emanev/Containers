@@ -1,7 +1,8 @@
 ﻿namespace Containers.Data.Models
 {
-    using Containers.Data.Common.Models;
     using System.Collections.Generic;
+
+    using Containers.Data.Common.Models;
 
     public class Warehouse : BaseDeletableModel<int>
     {

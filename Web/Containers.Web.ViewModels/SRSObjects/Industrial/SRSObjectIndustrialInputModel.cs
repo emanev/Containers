@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class SRSObjectIndustrialViewModel
+    public class SRSObjectIndustrialInputModel
     {
         public string Name { get; set; }
 
@@ -14,7 +14,7 @@
 
         public DateTime? EntryDate { get; set; }
 
-        public string UserId { get; set; }
+        public int UserId { get; set; }
 
         public int DistrictId { get; set; }
     }

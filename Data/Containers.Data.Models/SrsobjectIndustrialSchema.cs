@@ -2,10 +2,10 @@
 {
     using System;
 
-    public partial class SrsobjectIndustrialSchema
-    {
-        public int Id { get; set; }
+    using Containers.Data.Common.Models;
 
+    public class SrsobjectIndustrialSchema : BaseDeletableModel<int>
+    {
         public int SrsobjectIndustrialId { get; set; }
 
         public DateTime? EntryDate { get; set; }
