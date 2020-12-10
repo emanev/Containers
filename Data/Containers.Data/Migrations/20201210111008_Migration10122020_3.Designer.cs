@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Containers.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201207232753_Migration08122020")]
-    partial class Migration08122020
+    [Migration("20201210111008_Migration10122020_3")]
+    partial class Migration10122020_3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -205,24 +205,10 @@ namespace Containers.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
 
                     b.ToTable("ContainerCapacities");
                 });
@@ -234,24 +220,10 @@ namespace Containers.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
 
                     b.ToTable("ContainerColours");
                 });
@@ -290,7 +262,7 @@ namespace Containers.Data.Migrations
                     b.Property<bool>("IsLastMovement")
                         .HasColumnType("bit");
 
-                    b.Property<int>("WarehouseFromId")
+                    b.Property<int?>("WarehouseFromId")
                         .HasColumnType("int");
 
                     b.Property<int?>("WarehouseId")
@@ -436,10 +408,22 @@ namespace Containers.Data.Migrations
                     b.Property<string>("ContactPerson")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DistrictId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -453,6 +437,8 @@ namespace Containers.Data.Migrations
                     b.HasIndex("AddedByUserId");
 
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("SrsobjectIndustrials");
                 });
@@ -470,6 +456,18 @@ namespace Containers.Data.Migrations
                     b.Property<int>("ContainerId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MovementId")
                         .HasColumnType("int");
 
@@ -481,6 +479,8 @@ namespace Containers.Data.Migrations
                     b.HasIndex("AddedByUserId");
 
                     b.HasIndex("ContainerId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("MovementId");
 
@@ -499,11 +499,23 @@ namespace Containers.Data.Migrations
                     b.Property<string>("AddedByUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("EntryDate")
                         .HasColumnType("datetime2");
 
                     b.Property<byte[]>("Hour")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("SrsobjectIndustrialId")
                         .HasColumnType("int");
@@ -514,6 +526,8 @@ namespace Containers.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddedByUserId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("SrsobjectIndustrialId");
 
@@ -539,11 +553,23 @@ namespace Containers.Data.Migrations
                     b.Property<string>("ContactPerson")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("DistrictId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -558,6 +584,8 @@ namespace Containers.Data.Migrations
                     b.HasIndex("CityId");
 
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("Warehouses");
                 });
