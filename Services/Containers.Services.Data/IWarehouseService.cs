@@ -14,5 +14,7 @@
         IEnumerable<WarehouseViewModel> GetAll();
 
         WarehouseViewModel GetById(int id);
+
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }
 }

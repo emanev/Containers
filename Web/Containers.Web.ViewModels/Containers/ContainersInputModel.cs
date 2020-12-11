@@ -19,6 +19,10 @@
         //[Display(Name = "Capacity Type:")]
         public Enums.ContainerCapacity ContainerCapacity { get; set; }
 
+        public IEnumerable<KeyValuePair<string, string>> WarehouseItems { get; set; }
+
+        public int WarehouseToId { get; set; }
+
         //[Required]
         //[MaxLength(50)]
         //public string InventarNumber { get; set; }

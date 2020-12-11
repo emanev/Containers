@@ -86,5 +86,17 @@
             warehouse.ContactPerson = input.ContactPerson;
             await this.warehousesRepository.SaveChangesAsync();
         }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+        {
+            return this.warehousesRepository.AllAsNoTracking()
+                .Select(x => new
+                {
+                    x.Id,
+                    x.Name,
+                })
+                .OrderBy(x => x.Name)
+                .ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.Name));
+        }
     }
 }

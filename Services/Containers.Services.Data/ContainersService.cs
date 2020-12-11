@@ -1,5 +1,6 @@
 ﻿namespace Containers.Services.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -11,23 +12,49 @@
     public class ContainersService : IContainersService
     {
         private readonly IDeletableEntityRepository<Container> containersRepository;
+        private readonly IRepository<Movement> movementsRepository;
 
-        public ContainersService(IDeletableEntityRepository<Container> containersRepository)
+        public ContainersService(
+            IDeletableEntityRepository<Container> containersRepository,
+            IRepository<Movement> movementsRepository)
         {
             this.containersRepository = containersRepository;
+            this.movementsRepository = movementsRepository;
         }
 
-        public async Task CreateAsync(ContainersInputModel input)
+        public async Task CreateAsync(ContainersInputModel input, string userId)
         {
-            var container = new Container
+            try
             {
-                ContainerCapacityId = (int)input.ContainerCapacity,
-                ContainerColourId = (int)input.ContainerColour,
-                InventarNumber = input.InventarNumber,
-            };
+                var container = new Container
+                {
+                    ContainerCapacityId = (int)input.ContainerCapacity,
+                    ContainerColourId = (int)input.ContainerColour,
+                    InventarNumber = input.InventarNumber,
+                };
 
-            await this.containersRepository.AddAsync(container);
-            await this.containersRepository.SaveChangesAsync();
+                await this.containersRepository.AddAsync(container);
+                await this.containersRepository.SaveChangesAsync();
+
+                int containerId = container.Id;
+
+                var movement = new Movement
+                {
+                    ContainerId = containerId,
+                    WarehouseFromId = null,
+                    WarehouseToId = input.WarehouseToId,
+                    IsLastMovement = true,
+                    AddedByUserId = userId,
+                    EntryDate = null,
+                };
+
+                await this.movementsRepository.AddAsync(movement);
+                await this.movementsRepository.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         public async Task UpdateAsync(int id, ContainersInputModel input)

@@ -18,10 +18,6 @@
 
         public int ContainerCapacityId { get; set; }
 
-        public virtual ContainerCapacity ContainerCapacity { get; set; }
-
-        public virtual ContainerColour ContainerColour { get; set; }
-
         public virtual ICollection<Movement> Movement { get; set; }
 
         public virtual ICollection<SrsobjectIndustrialContainer> SrsobjectIndustrialContainer { get; set; }

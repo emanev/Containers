@@ -28,10 +28,6 @@
 
         public DbSet<District> Districts { get; set; }
 
-        public DbSet<ContainerCapacity> ContainerCapacities { get; set; }
-
-        public DbSet<ContainerColour> ContainerColours { get; set; }
-
         public DbSet<Movement> Movements { get; set; }
 
         public DbSet<ObjectType> ObjectTypes { get; set; }

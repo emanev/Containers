@@ -187,43 +187,9 @@ namespace Containers.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContainerCapacityId");
-
-                    b.HasIndex("ContainerColourId");
-
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Container");
-                });
-
-            modelBuilder.Entity("Containers.Data.Models.ContainerCapacity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContainerCapacities");
-                });
-
-            modelBuilder.Entity("Containers.Data.Models.ContainerColour", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContainerColours");
                 });
 
             modelBuilder.Entity("Containers.Data.Models.District", b =>
@@ -253,12 +219,12 @@ namespace Containers.Data.Migrations
 
                     b.Property<int>("ContainerId")
                         .HasColumnType("int");
-
+                   
                     b.Property<DateTime?>("EntryDate")
                         .HasColumnType("datetime2");
-
+                  
                     b.Property<bool>("IsLastMovement")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit");                  
 
                     b.Property<int?>("WarehouseFromId")
                         .HasColumnType("int");
@@ -277,11 +243,7 @@ namespace Containers.Data.Migrations
                     b.HasIndex("AddedByUserId");
 
                     b.HasIndex("ContainerId");
-
-                    b.HasIndex("WarehouseId");
-
-                    b.HasIndex("WarehouseId1");
-
+                    
                     b.ToTable("Movements");
                 });
 
@@ -690,21 +652,6 @@ namespace Containers.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Containers.Data.Models.Container", b =>
-                {
-                    b.HasOne("Containers.Data.Models.ContainerCapacity", "ContainerCapacity")
-                        .WithMany("Containers")
-                        .HasForeignKey("ContainerCapacityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Containers.Data.Models.ContainerColour", "ContainerColour")
-                        .WithMany("Containers")
-                        .HasForeignKey("ContainerColourId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Containers.Data.Models.Movement", b =>

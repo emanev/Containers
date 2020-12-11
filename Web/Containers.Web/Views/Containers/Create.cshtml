@@ -1,5 +1,17 @@
-﻿@using Containers.Web.ViewModels.Containers
-@model ContainersInputModel
+﻿@model Containers.Web.ViewModels.Containers.ContainersInputModel
+@{
+    //if (this.Model == null)
+    //    return;
+
+    var warehouseItems = this.Model.WarehouseItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+@*@model Containers.Web.ViewModels.Containers.ContainersInputModel
+    @{
+        this.ViewData["Title"] = "Add new recipe";
+        var warehouseItems = this.Model.WarehouseItems.Select(x => new SelectListItem(x.Value, x.Key));
+    }*@
+
 <h1>Add container</h1>
 
 <form method="post" class="col-md-6 offset-md-3"
@@ -14,16 +26,44 @@
     <div class="form-group">
         <label asp-for="ContainerColour"></label>
         <select asp-for="ContainerColour" class="form-control"
-                asp-items="@Html.GetEnumSelectList<Enums.ContainerColour>()">
+                asp-items="@Html.GetEnumSelectList<Containers.Web.ViewModels.Containers.Enums.ContainerColour>()">
         </select>
         <span asp-validation-for="ContainerColour" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ContainerCapacity"></label>
         <select asp-for="ContainerCapacity" class="form-control"
-                asp-items="@Html.GetEnumSelectList<Enums.ContainerCapacity>()">
+                asp-items="@Html.GetEnumSelectList<Containers.Web.ViewModels.Containers.Enums.ContainerCapacity>()">
         </select>
         <span asp-validation-for="ContainerCapacity" class="text-danger"></span>
-    </div>   
+    </div>
+    <div class="form-group">
+        <label asp-for="WarehouseItems"></label>
+        <select asp-for="WarehouseItems" class="form-control single-select" singe="single" id="warehouseddl"               
+                asp-items="warehouseItems"><option value="0">--- Please choose ---</option></select>
+        <span asp-validation-for="WarehouseItems" class="text-danger"></span>
+    </div>
+    <input type="hidden" id="hiddenTab" name="hiddenTab" />
+    @Html.HiddenFor(model => model.WarehouseToId, new { id = "hiddenWarehouse" })
     <input type="submit" class="btn btn-primary" />
 </form>
+
+@section Scripts {
+    <script>
+    $(function(){
+      $(".single-select").removeAttr("multiple");
+    });
+
+   
+    $("#warehouseddl").on('change',function(){
+        var getValue = $(this).val();       
+        var test = $("input[id=hiddenWarehouse]:hidden").val(getValue);        
+        var test = $("input[name=hiddenTab]:hidden").val(getValue);             
+    });
+
+    //$(function(){
+    //  $(".single-select").removeAttr("multiple");
+    //});
+
+    </script>
+}

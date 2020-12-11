@@ -3,18 +3,27 @@
     using System;
     using System.Threading.Tasks;
 
+    using Containers.Data.Models;
     using Containers.Services.Data;
     using Containers.Web.ViewModels.Containers;
     using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
     public class ContainersController : BaseController
     {
         private readonly IContainersService containersService;
+        private readonly IWarehouseService warehouseService;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public ContainersController(IContainersService containersService)
+        public ContainersController(
+            IContainersService containersService,
+            IWarehouseService warehouseService,
+            UserManager<ApplicationUser> userManager)
         {
             this.containersService = containersService;
+            this.warehouseService = warehouseService;
+            this.userManager = userManager;
         }
 
         public IActionResult All()
@@ -50,7 +59,9 @@
         [Authorize]
         public IActionResult Create()
         {
-            return this.View();
+            var viewModel = new ContainersInputModel();
+            viewModel.WarehouseItems = this.warehouseService.GetAllAsKeyValuePairs();
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -64,9 +75,14 @@
                     return this.View();
                 }
 
-                await this.containersService.CreateAsync(model);
+                if (model.WarehouseToId == 0)
+                {
+                    return this.View();
+                }
 
-                this.TempData["Message"] = "Container added successfully.";
+                var user = await this.userManager.GetUserAsync(this.User);
+
+                await this.containersService.CreateAsync(model, user.Id);
 
                 return this.RedirectToAction("All");
             }

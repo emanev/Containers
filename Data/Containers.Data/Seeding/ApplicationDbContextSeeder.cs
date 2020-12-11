@@ -29,8 +29,6 @@
                               new SettingsSeeder(),
                               new DistrictsSeeder(),
                               new CitiesSeeder(),
-                              new ContainerCapacitiesSeeder(),
-                              new ContainerColoursSeeder(),
                               new ObjectTypesSeeder(),
                           };
 

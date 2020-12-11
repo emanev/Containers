@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Containers.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201210111008_Migration10122020_3")]
-    partial class Migration10122020_3
+    [Migration("20201210184957_Migration11")]
+    partial class Migration11
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -189,43 +189,9 @@ namespace Containers.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ContainerCapacityId");
-
-                    b.HasIndex("ContainerColourId");
-
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Container");
-                });
-
-            modelBuilder.Entity("Containers.Data.Models.ContainerCapacity", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContainerCapacities");
-                });
-
-            modelBuilder.Entity("Containers.Data.Models.ContainerColour", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ContainerColours");
                 });
 
             modelBuilder.Entity("Containers.Data.Models.District", b =>
@@ -256,11 +222,23 @@ namespace Containers.Data.Migrations
                     b.Property<int>("ContainerId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedOn")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime?>("EntryDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsLastMovement")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedOn")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("WarehouseFromId")
                         .HasColumnType("int");
@@ -279,6 +257,8 @@ namespace Containers.Data.Migrations
                     b.HasIndex("AddedByUserId");
 
                     b.HasIndex("ContainerId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("WarehouseId");
 
@@ -692,21 +672,6 @@ namespace Containers.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("Containers.Data.Models.Container", b =>
-                {
-                    b.HasOne("Containers.Data.Models.ContainerCapacity", "ContainerCapacity")
-                        .WithMany("Containers")
-                        .HasForeignKey("ContainerCapacityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Containers.Data.Models.ContainerColour", "ContainerColour")
-                        .WithMany("Containers")
-                        .HasForeignKey("ContainerColourId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Containers.Data.Models.Movement", b =>
