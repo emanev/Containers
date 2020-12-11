@@ -23,7 +23,7 @@
             var warehouse = new Warehouse
             {
                 DistrictId = input.DistrictId,
-                CityId = input.CityId,
+                CityId = 1, // input.CityId,
                 Address = input.Address,
                 ContactPerson = input.ContactPerson,
                 Name = input.Name,
@@ -42,8 +42,8 @@
                 .Select(x => new WarehouseViewModel
                 {
                     Id = x.Id,
-                    DistrictId = x.DistrictId,
-                    CityId = x.CityId,
+                    DistrictName = x.District.Name,
+                    CityName = x.City.Name,
                     Address = x.Address,
                     ContactPerson = x.ContactPerson,
                     Name = x.Name,
@@ -54,36 +54,44 @@
             return warehouses;
         }
 
-        public WarehouseViewModel GetById(int id)
+        public WarehouseInputModel GetById(int id)
         {
             var warehouse = this.warehousesRepository.AllAsNoTracking()
                 .Where(x => x.Id == id)
-                 .Select(x => new WarehouseViewModel
+                 .Select(x => new WarehouseInputModel
                  {
-                     Id = x.Id,
-                     DistrictId = x.DistrictId,
-                     CityId = x.CityId,
                      Address = x.Address,
                      ContactPerson = x.ContactPerson,
                      Name = x.Name,
                      Email = x.Email,
                      Phone = x.Phone,
+                     CityId = x.CityId,
+                     DistrictId = x.DistrictId,
+                     CityName = x.City.Name,
+                     DistrictName = x.District.Name,
                  })
                 .FirstOrDefault();
 
             return warehouse;
         }
 
-        public async Task UpdateAsync(int id, WarehouseViewModel input)
+        public async Task UpdateAsync(int id, WarehouseInputModel input)
         {
             var warehouse = this.warehousesRepository.All().FirstOrDefault(x => x.Id == id);
             warehouse.Name = input.Name;
             warehouse.DistrictId = input.DistrictId;
-            warehouse.CityId = input.CityId;
+            warehouse.CityId = 1; // input.CityId;
             warehouse.Address = input.Address;
             warehouse.Email = input.Email;
             warehouse.Phone = input.Phone;
             warehouse.ContactPerson = input.ContactPerson;
+            await this.warehousesRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var warehouse = this.warehousesRepository.All().FirstOrDefault(x => x.Id == id);
+            this.warehousesRepository.Delete(warehouse);
             await this.warehousesRepository.SaveChangesAsync();
         }
 

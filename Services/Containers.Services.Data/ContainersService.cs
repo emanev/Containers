@@ -102,6 +102,14 @@
 
         public async Task DeleteAsync(int id)
         {
+            var movements = this.movementsRepository.All().Where(x => x.ContainerId == id);
+            foreach (var movement in movements)
+            {
+                this.movementsRepository.Delete(movement);
+            }
+
+            await this.movementsRepository.SaveChangesAsync();
+
             var container = this.containersRepository.All().FirstOrDefault(x => x.Id == id);
             this.containersRepository.Delete(container);
             await this.containersRepository.SaveChangesAsync();

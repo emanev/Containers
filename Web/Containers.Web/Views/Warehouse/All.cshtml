@@ -1,0 +1,49 @@
+﻿@model Containers.Web.ViewModels.Warehouses.WarehouseListViewModel
+@{
+    this.ViewData["Title"] = "All warehouses";   //, page " + Model.PageNumber;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>ContactPerson</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>DistrictName</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var warehouse in this.Model.Warehouses)
+            {
+            <tr>
+                <td>@warehouse.Name</td>
+                <td>@warehouse.Address</td>
+                <td>@warehouse.ContactPerson</td>
+                <td>@warehouse.Email</td>
+                <td>@warehouse.Phone</td>
+                <td>@warehouse.DistrictName</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@warehouse.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@warehouse.Id">Delete</a>
+                </td>                
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr />
+@*<partial name="_PagingPartial" model="@Model" />*@
+

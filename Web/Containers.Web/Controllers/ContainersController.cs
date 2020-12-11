@@ -72,12 +72,15 @@
             {
                 if (!this.ModelState.IsValid)
                 {
-                    return this.View();
+                    model.WarehouseItems = this.warehouseService.GetAllAsKeyValuePairs();
+                    return this.View(model);
                 }
 
                 if (model.WarehouseToId == 0)
                 {
-                    return this.View();
+                    model.WarehouseItems = this.warehouseService.GetAllAsKeyValuePairs();
+                    this.ModelState.AddModelError(string.Empty, "Please fill warehouses!");
+                    return this.View(model);
                 }
 
                 var user = await this.userManager.GetUserAsync(this.User);

@@ -30,6 +30,7 @@
                               new DistrictsSeeder(),
                               new CitiesSeeder(),
                               new ObjectTypesSeeder(),
+                              new WarehousesSeeder(),
                           };
 
             foreach (var seeder in seeders)

@@ -9,11 +9,13 @@
     {
         Task CreateAsync(WarehouseInputModel model, string userId);
 
-        Task UpdateAsync(int id, WarehouseViewModel input);
+        Task UpdateAsync(int id, WarehouseInputModel input);
+
+        Task DeleteAsync(int id);
 
         IEnumerable<WarehouseViewModel> GetAll();
 
-        WarehouseViewModel GetById(int id);
+        WarehouseInputModel GetById(int id);
 
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }

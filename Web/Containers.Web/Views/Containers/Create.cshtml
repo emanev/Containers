@@ -1,16 +1,7 @@
 ﻿@model Containers.Web.ViewModels.Containers.ContainersInputModel
 @{
-    //if (this.Model == null)
-    //    return;
-
     var warehouseItems = this.Model.WarehouseItems.Select(x => new SelectListItem(x.Value, x.Key));
 }
-
-@*@model Containers.Web.ViewModels.Containers.ContainersInputModel
-    @{
-        this.ViewData["Title"] = "Add new recipe";
-        var warehouseItems = this.Model.WarehouseItems.Select(x => new SelectListItem(x.Value, x.Key));
-    }*@
 
 <h1>Add container</h1>
 
@@ -57,13 +48,9 @@
    
     $("#warehouseddl").on('change',function(){
         var getValue = $(this).val();       
-        var test = $("input[id=hiddenWarehouse]:hidden").val(getValue);        
-        var test = $("input[name=hiddenTab]:hidden").val(getValue);             
+        $("input[id=hiddenWarehouse]:hidden").val(getValue);        
+        //var test = $("input[name=hiddenTab]:hidden").val(getValue);             
     });
-
-    //$(function(){
-    //  $(".single-select").removeAttr("multiple");
-    //});
-
+        
     </script>
 }

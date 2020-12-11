@@ -1,5 +1,6 @@
 ﻿namespace Containers.Web.ViewModels.Warehouses
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public class WarehouseInputModel
@@ -27,5 +28,11 @@
         public int CityId { get; set; }
 
         public int DistrictId { get; set; }
+
+        public string CityName { get; set; }
+
+        public string DistrictName { get; set; }
+
+        public IEnumerable<KeyValuePair<string, string>> DistrictItems { get; set; }
     }
 }

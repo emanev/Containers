@@ -1,0 +1,64 @@
+﻿@model Containers.Web.ViewModels.Warehouses.WarehouseInputModel
+@{
+    var districtItems = this.Model.DistrictItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<h1>Add container</h1>
+
+<form method="post" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ContactPerson"></label>
+        <input asp-for="ContactPerson" class="form-control" />
+        <span asp-validation-for="ContactPerson" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input asp-for="Phone" class="form-control" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>    
+    <div class="form-group">
+        <label asp-for="DistrictItems"></label>
+        <select asp-for="DistrictItems" class="form-control single-select" singe="single" id="districtddl"
+                asp-items="districtItems">
+            <option value="0">--- Please choose ---</option>
+        </select>
+        <span asp-validation-for="DistrictItems" class="text-danger"></span>
+    </div>
+    <input type="hidden" id="hiddenTab" name="hiddenTab" />
+    @Html.HiddenFor(model => model.DistrictId, new { id = "hiddenDistrict" })
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+@section Scripts {
+    <script>
+    $(function(){
+      $(".single-select").removeAttr("multiple");
+    });
+
+
+    $("#districtddl").on('change',function(){
+        var getValue = $(this).val();
+        $("input[id=hiddenDistrict]:hidden").val(getValue);
+        //var test = $("input[name=hiddenTab]:hidden").val(getValue);
+    });
+
+    </script>
+}
