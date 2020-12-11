@@ -16,7 +16,6 @@
         public Enums.ContainerColour ContainerColour { get; set; }
 
         [EnumDataType(typeof(Enums.ContainerCapacity))]
-        //[Display(Name = "Capacity Type:")]
         public Enums.ContainerCapacity ContainerCapacity { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> WarehouseItems { get; set; }
