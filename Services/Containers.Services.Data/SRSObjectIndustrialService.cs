@@ -24,19 +24,20 @@
 
         public IEnumerable<SRSObjectIndustrialViewModel> GetAll()
         {
-            var containers = this.srsObjectIndurstiralRepository.AllAsNoTracking()
+            var industrialObjects = this.srsObjectIndurstiralRepository.AllAsNoTracking()
                 .Select(x => new SRSObjectIndustrialViewModel
                 {
+                    Id = x.Id,
                     Name = x.Name,
                     Address = x.Address,
                     ContactPerson = x.ContactPerson,
                     Note = x.Note,
                     EntryDate = x.EntryDate,
-                    DistrictId = x.DistrictId,
+                    DistrictName = x.District.Name,
                     UserId = x.AddedByUserId,
                 }).ToList();
 
-            return containers;
+            return industrialObjects;
         }
 
         public SRSObjectIndustrialViewModel GetById(int id)
@@ -45,12 +46,13 @@
                 .Where(x => x.Id == id)
                  .Select(x => new SRSObjectIndustrialViewModel
                  {
+                     Id = x.Id,
                      Name = x.Name,
                      Address = x.Address,
                      ContactPerson = x.ContactPerson,
                      Note = x.Note,
                      EntryDate = x.EntryDate,
-                     DistrictId = x.DistrictId,
+                     DistrictName = x.District.Name,
                      UserId = x.AddedByUserId,
                  })
                 .FirstOrDefault();
@@ -75,7 +77,7 @@
             await this.srsObjectIndurstiralRepository.SaveChangesAsync();
         }
 
-        public async Task CreateSchemaAsync(SRSObjectIndustrialSchemaInputModel input, int srsObjectIndustrialId, string userId)
+        public async Task CreateSchemeAsync(SRSObjectIndustrialSchemeInputModel input, string userId)
         {
             var schema = new SrsobjectIndustrialSchema
             {
@@ -90,11 +92,11 @@
             await this.srsObjectIndurstiralSchemaRepository.SaveChangesAsync();
         }
 
-        public IEnumerable<SRSObjectIndustrialSchemaViewModel> GetAllSchemesBySrsObjectIndustrialId(int id)
+        public IEnumerable<SRSObjectIndustrialSchemeViewModel> GetAllSchemesBySrsObjectIndustrialId(int id)
         {
             var schemes = this.srsObjectIndurstiralSchemaRepository.AllAsNoTracking()
                 .Where(x => x.Id == id)
-                 .Select(x => new SRSObjectIndustrialSchemaViewModel
+                 .Select(x => new SRSObjectIndustrialSchemeViewModel
                  {
                      EntryDate = x.EntryDate,
                      WeekDay = x.WeekDay,

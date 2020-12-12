@@ -36,8 +36,4 @@
     <ProjectReference Include="..\Containers.Web.Infrastructure\Containers.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\Containers.Web.ViewModels\Containers.Web.ViewModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\SRSObjectIndustrial\" />
-  </ItemGroup>
 </Project>

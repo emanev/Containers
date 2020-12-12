@@ -13,8 +13,8 @@
 
         Task CreateAsync(SRSObjectIndustrialInputModel input, string userId);
 
-        Task CreateSchemaAsync(SRSObjectIndustrialSchemaInputModel input, int srsObjectIndustrialId, string userId);
+        Task CreateSchemeAsync(SRSObjectIndustrialSchemeInputModel input, string userId);
 
-        IEnumerable<SRSObjectIndustrialSchemaViewModel> GetAllSchemesBySrsObjectIndustrialId(int id);
+        IEnumerable<SRSObjectIndustrialSchemeViewModel> GetAllSchemesBySrsObjectIndustrialId(int id);
     }
 }

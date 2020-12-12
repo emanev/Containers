@@ -5,5 +5,7 @@
         public const string SystemName = "Containers";
 
         public const string AdministratorRoleName = "Administrator";
+
+        public const string SRSObjectIndustrialName = "СРС Индустрия";
     }
 }

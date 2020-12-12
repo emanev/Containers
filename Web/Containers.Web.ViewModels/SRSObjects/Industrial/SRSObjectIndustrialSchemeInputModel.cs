@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class SRSObjectIndustrialSchemaViewModel
+    public class SRSObjectIndustrialSchemeInputModel
     {
         public int SrsobjectIndustrialId { get; set; }
 
@@ -11,7 +11,5 @@
         public byte WeekDay { get; set; }
 
         public byte[] Hour { get; set; }
-
-        public string UserId { get; set; }
     }
 }

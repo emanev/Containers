@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class SRSObjectIndustrialSchemaInputModel
+    public class SRSObjectIndustrialSchemeViewModel
     {
         public int SrsobjectIndustrialId { get; set; }
 

@@ -1,0 +1,27 @@
+﻿@model Containers.Web.ViewModels.SRSObjects.Industrial.SRSObjectIndustrialSchemeInputModel
+@{
+    ViewData["Title"] = "Cretae scheme";
+}
+
+<h1>Add SRS Object industrial</h1>
+
+<form method="post" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>
+    <div class="form-group">
+        <label asp-for="EntryDate"></label>
+        <input asp-for="EntryDate" class="form-control" />
+        <span asp-validation-for="EntryDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="WeekDay"></label>
+        <input asp-for="WeekDay" class="form-control" />
+        <span asp-validation-for="WeekDay" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Hour"></label>
+        <input asp-for="Hour" class="form-control" />
+        <span asp-validation-for="Hour" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-primary" />
+</form>
