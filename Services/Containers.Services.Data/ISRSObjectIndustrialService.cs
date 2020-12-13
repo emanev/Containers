@@ -20,5 +20,7 @@
         Task CreateContainersAsync(SRSObjectIndustrialContainerInputModel input, int id, string userId);
 
         IEnumerable<SRSObjectIndustrialContainerViewModel> GetAllContainersBySrsObjectIndustrialId(int id);
+
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }
 }

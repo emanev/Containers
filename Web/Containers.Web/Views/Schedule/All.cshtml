@@ -1,11 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Containers.Web.Views.Schedules
-{
-    public class All
-    {
-    }
+﻿@model Containers.Web.ViewModels.Schedules.ScheduleListViewModel
+@{
+    this.ViewData["Title"] = "All schedules";   //, page " + Model.PageNumber;
 }
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>ObjectType</th>
+                <th>RaiseDate</th>
+                <th>SrsobjectName</th>
+                <th>DistrictName</th>
+                <th>RaiseTimeFrom</th>
+                <th>RaiseTimeTo</th>
+                @*<th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schedule in this.Model.Schedules)
+            {
+                <tr>
+                    <td>@schedule.Description</td>
+                    <td>@schedule.ObjectType</td>
+                    <td>@schedule.RaiseDate</td>
+                    <td>@schedule.SrsobjectName</td>
+                    <td>@schedule.DistrictName</td>
+                    <td>@schedule.RaiseTimeFrom</td>
+                    <td>@schedule.RaiseTimeTo</td>
+                    @*<td>
+                        <a asp-action="Edit" asp-route-id="@warehouse.Id">Edit</a> |
+                        <a asp-action="Delete" asp-route-id="@warehouse.Id">Delete</a>
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<hr />
+@*<partial name="_PagingPartial" model="@Model" />*@
+
