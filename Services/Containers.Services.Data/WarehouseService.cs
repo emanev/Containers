@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-
+    using Containers.Common;
     using Containers.Data.Common.Repositories;
     using Containers.Data.Models;
     using Containers.Web.ViewModels.Warehouses;
@@ -98,6 +98,7 @@
         public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
         {
             return this.warehousesRepository.AllAsNoTracking()
+                .Where(x => x.Name != GlobalConstants.SRSObjectIndustrialName)
                 .Select(x => new
                 {
                     x.Id,
