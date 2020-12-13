@@ -13,13 +13,16 @@
     {
         private readonly IDeletableEntityRepository<Container> containersRepository;
         private readonly IRepository<Movement> movementsRepository;
+        private readonly IDeletableEntityRepository<SrsobjectIndustrialContainer> srsObjectIndurstiralContainerRepository;
 
         public ContainersService(
             IDeletableEntityRepository<Container> containersRepository,
-            IRepository<Movement> movementsRepository)
+            IRepository<Movement> movementsRepository,
+            IDeletableEntityRepository<SrsobjectIndustrialContainer> srsObjectIndurstiralContainerRepository)
         {
             this.containersRepository = containersRepository;
             this.movementsRepository = movementsRepository;
+            this.srsObjectIndurstiralContainerRepository = srsObjectIndurstiralContainerRepository;
         }
 
         public async Task CreateAsync(ContainersInputModel input, string userId)
@@ -113,6 +116,24 @@
             var container = this.containersRepository.All().FirstOrDefault(x => x.Id == id);
             this.containersRepository.Delete(container);
             await this.containersRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs()
+        {
+            var industrialContainersIds = this.srsObjectIndurstiralContainerRepository.AllAsNoTracking()
+                .Select(x => x.ContainerId).ToList();
+
+            var result = this.containersRepository.AllAsNoTracking()
+                .Where(x => !industrialContainersIds.Contains(x.Id))
+                .Select(x => new
+                {
+                    x.Id,
+                    x.InventarNumber,
+                })
+                .OrderBy(x => x.InventarNumber)
+                .ToList().Select(x => new KeyValuePair<string, string>(x.Id.ToString(), x.InventarNumber));
+
+            return result;
         }
     }
 }

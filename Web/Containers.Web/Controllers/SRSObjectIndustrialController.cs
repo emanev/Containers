@@ -14,15 +14,18 @@
     {
         private readonly ISRSObjectIndustrialService srsObjectIndustrialService;
         private readonly IDistrictsService districtService;
+        private readonly IContainersService containerService;
         private readonly UserManager<ApplicationUser> userManager;
 
         public SRSObjectIndustrialController(
             ISRSObjectIndustrialService srsObjectIndustrialService,
             IDistrictsService districtService,
+            IContainersService containerService,
             UserManager<ApplicationUser> userManager)
         {
             this.srsObjectIndustrialService = srsObjectIndustrialService;
             this.districtService = districtService;
+            this.containerService = containerService;
             this.userManager = userManager;
         }
 
@@ -136,6 +139,67 @@
                 {
                     Id = id,
                     SRSObjectIndustrialSchemes = this.srsObjectIndustrialService.GetAllSchemesBySrsObjectIndustrialId(id),
+                };
+                return this.View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View();
+            }
+        }
+
+        [Authorize]
+        public IActionResult CreateContainer()
+        {
+            var model = new SRSObjectIndustrialContainerInputModel();
+            model.ContainerItems = this.containerService.GetAllAsKeyValuePairs();
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateContainer(SRSObjectIndustrialContainerInputModel model, int id)
+        {
+            try
+            {
+                if (!this.ModelState.IsValid)
+                {
+                    model.ContainerItems = this.containerService.GetAllAsKeyValuePairs();
+                    return this.View(model);
+                }
+
+                if (model.ContainerId == 0)
+                {
+                    model.ContainerItems = this.containerService.GetAllAsKeyValuePairs();
+                    this.ModelState.AddModelError(string.Empty, "Please choose container!");
+                    return this.View(model);
+                }
+
+                var user = await this.userManager.GetUserAsync(this.User);
+
+                await this.srsObjectIndustrialService.CreateContainersAsync(model, id, user.Id);
+
+                this.TempData["Message"] = "Industrial container was added successfully.";
+
+                return this.RedirectToAction("AllContainers", new { id });
+            }
+            catch (Exception ex)
+            {
+                model.ContainerItems = this.containerService.GetAllAsKeyValuePairs();
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View();
+            }
+        }
+
+        public IActionResult AllContainers(int id)
+        {
+            try
+            {
+                var viewModel = new SRSObjectIndustrialContainerListViewModel
+                {
+                    Id = id,
+                    SRSObjectIndustrialContainers = this.srsObjectIndustrialService.GetAllContainersBySrsObjectIndustrialId(id),
                 };
                 return this.View(viewModel);
             }

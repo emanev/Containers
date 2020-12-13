@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Containers.Common\Containers.Common.csproj" />
     <ProjectReference Include="..\..\Data\Containers.Data.Common\Containers.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\Containers.Data.Models\Containers.Data.Models.csproj" />
     <ProjectReference Include="..\..\Web\Containers.Web.ViewModels\Containers.Web.ViewModels.csproj" />

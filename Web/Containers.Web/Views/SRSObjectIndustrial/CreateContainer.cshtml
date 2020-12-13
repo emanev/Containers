@@ -1,0 +1,38 @@
+﻿@model Containers.Web.ViewModels.SRSObjects.Industrial.SRSObjectIndustrialContainerInputModel
+@{
+    var containerItems = this.Model.ContainerItems.Select(x => new SelectListItem(x.Value, x.Key));
+}
+
+<h1>Add SRS Object industrial</h1>
+
+<form method="post" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>    
+    <div class="form-group">
+        <label asp-for="ContainerItems"></label>
+        <select asp-for="ContainerItems" class="form-control single-select" singe="single" id="containerddl"
+                asp-items="containerItems">
+            <option value="0">--- Please choose ---</option>
+        </select>
+        <span asp-validation-for="ContainerItems" class="text-danger"></span>
+    </div>
+    <input type="hidden" id="hiddenTab" name="hiddenTab" />
+    @Html.HiddenFor(model => model.ContainerId, new { id = "hiddenContainer" })
+    <input type="submit" class="btn btn-primary" />
+</form>
+
+@section Scripts {
+    <script>
+    $(function(){
+      $(".single-select").removeAttr("multiple");
+    });
+
+
+    $("#containerddl").on('change',function(){
+        var getValue = $(this).val();
+        $("input[id=hiddenContainer]:hidden").val(getValue);
+        //var test = $("input[name=hiddenTab]:hidden").val(getValue);
+    });
+
+    </script>
+}

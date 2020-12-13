@@ -14,5 +14,7 @@
         ContainersViewModel GetById(int id);
 
         Task DeleteAsync(int id);
+
+        IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }
 }

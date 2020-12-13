@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Containers.Common;
     using Containers.Data.Common.Repositories;
     using Containers.Data.Models;
     using Containers.Web.ViewModels.SRSObjects.Industrial;
@@ -13,13 +14,25 @@
     {
         private readonly IDeletableEntityRepository<SrsobjectIndustrial> srsObjectIndurstiralRepository;
         private readonly IDeletableEntityRepository<SrsobjectIndustrialSchema> srsObjectIndurstiralSchemaRepository;
+        private readonly IDeletableEntityRepository<SrsobjectIndustrialContainer> srsObjectIndurstiralContainerRepository;
+        private readonly IRepository<Movement> movementRepository;
+        private readonly IDeletableEntityRepository<Warehouse> warehousesRepository;
+        private readonly IDeletableEntityRepository<Container> containersRepository;
 
         public SRSObjectIndustrialService(
             IDeletableEntityRepository<SrsobjectIndustrial> srsObjectIndurstiralRepository,
-            IDeletableEntityRepository<SrsobjectIndustrialSchema> srsObjectIndurstiralSchemaRepository)
+            IDeletableEntityRepository<SrsobjectIndustrialSchema> srsObjectIndurstiralSchemaRepository,
+            IDeletableEntityRepository<SrsobjectIndustrialContainer> srsObjectIndurstiralContainerRepository,
+            IRepository<Movement> movementRepository,
+            IDeletableEntityRepository<Warehouse> warehousesRepository,
+            IDeletableEntityRepository<Container> containersRepository)
         {
             this.srsObjectIndurstiralRepository = srsObjectIndurstiralRepository;
             this.srsObjectIndurstiralSchemaRepository = srsObjectIndurstiralSchemaRepository;
+            this.srsObjectIndurstiralContainerRepository = srsObjectIndurstiralContainerRepository;
+            this.movementRepository = movementRepository;
+            this.warehousesRepository = warehousesRepository;
+            this.containersRepository = containersRepository;
         }
 
         public IEnumerable<SRSObjectIndustrialViewModel> GetAll()
@@ -105,6 +118,63 @@
                  }).ToList();
 
             return schemes;
+        }
+
+        public async Task CreateContainersAsync(SRSObjectIndustrialContainerInputModel input, int id, string userId)
+        {
+            var lastContainerMovement = this.movementRepository.All()
+                .FirstOrDefault(x => x.ContainerId == input.ContainerId && x.IsLastMovement == true);
+
+            lastContainerMovement.IsLastMovement = false;
+            await this.movementRepository.SaveChangesAsync();
+
+            var srsObjectIndustrialId = this.warehousesRepository.All()
+                .Where(x => x.Name == GlobalConstants.SRSObjectIndustrialName)
+                .Select(x => x.Id)
+                .FirstOrDefault();
+
+            var movement = new Movement
+            {
+                ContainerId = input.ContainerId,
+                WarehouseFromId = lastContainerMovement.WarehouseToId,
+                WarehouseToId = srsObjectIndustrialId,
+                IsLastMovement = true,
+                EntryDate = DateTime.UtcNow,
+                AddedByUserId = userId,
+            };
+
+            await this.movementRepository.AddAsync(movement);
+            await this.movementRepository.SaveChangesAsync();
+
+            var movementId = movement.Id;
+
+            var container = new SrsobjectIndustrialContainer
+            {
+                SrsobjectIndustrialId = id,
+                ContainerId = input.ContainerId,
+                MovementId = movementId,
+                AddedByUserId = userId,
+            };
+
+            await this.srsObjectIndurstiralContainerRepository.AddAsync(container);
+            await this.srsObjectIndurstiralContainerRepository.SaveChangesAsync();
+        }
+
+        public IEnumerable<SRSObjectIndustrialContainerViewModel> GetAllContainersBySrsObjectIndustrialId(int id)
+        {
+            var containers = this.srsObjectIndurstiralContainerRepository.AllAsNoTracking()
+                .Where(x => x.SrsobjectIndustrialId == id)
+                 .Select(x => new SRSObjectIndustrialContainerViewModel
+                 {
+                     SrsobjectIndustrialId = id,
+                     SrsobjectIndustrialName = x.SrsobjectIndustrial.Name,
+                     ContainerId = x.ContainerId,
+                     ContainerInventarNumber = x.Container.InventarNumber,
+                     MovementId = x.MovementId,
+                     UserId = x.AddedByUserId,
+                 }).ToList();
+
+            return containers;
         }
     }
 }

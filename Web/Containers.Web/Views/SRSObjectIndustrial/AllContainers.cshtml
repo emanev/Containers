@@ -1,0 +1,38 @@
+﻿@model Containers.Web.ViewModels.SRSObjects.Industrial.SRSObjectIndustrialContainerListViewModel
+@{
+    this.ViewData["Title"] = "All Industrial Containers";   //, page " + Model.PageNumber;
+}
+
+@if (this.TempData.ContainsKey("Message"))
+{
+    <div class="alert alert-success">@this.TempData["Message"]</div>
+}
+
+<h1>@this.ViewData["Title"]</h1>
+<hr />
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ContainerInventarNumber</th>
+                <th>SrsobjectIndustrialName</th>                
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var container in this.Model.SRSObjectIndustrialContainers)
+            {
+                <tr>
+                    <td>@container.ContainerInventarNumber</td>
+                    <td>@container.SrsobjectIndustrialName</td>                    
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div>
+    <a asp-action="Details" asp-route-id="@Model.Id">Back to DetailsList</a>
+</div>
+
+<hr />
+@*<partial name="_PagingPartial" model="@Model" />*@
