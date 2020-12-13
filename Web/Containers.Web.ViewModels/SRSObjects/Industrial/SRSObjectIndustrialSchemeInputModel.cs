@@ -1,6 +1,7 @@
 ﻿namespace Containers.Web.ViewModels.SRSObjects.Industrial
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
 
     public class SRSObjectIndustrialSchemeInputModel
     {
@@ -8,8 +9,9 @@
 
         public DateTime? EntryDate { get; set; }
 
-        public byte WeekDay { get; set; }
+        public Weekday WeekDay { get; set; }
 
-        public byte[] Hour { get; set; }
+        [Required]
+        public TimeSpan Hour { get; set; }
     }
 }

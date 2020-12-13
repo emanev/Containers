@@ -35,10 +35,15 @@
             return this.View(viewModel);
         }
 
-        [HttpGet("SRSObjectIndustrial/All/{id}")]
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var srsObjectIndustrial = this.srsObjectIndustrialService.GetById(id);
+            if (srsObjectIndustrial == null)
+            {
+                return this.NotFound();
+            }
+
             return this.View(srsObjectIndustrial);
         }
 
@@ -84,9 +89,16 @@
             }
         }
 
-        [HttpPost("SRSObjectIndustrial/All/{id}")]
         [Authorize]
-        public async Task<IActionResult> CreateScheme(SRSObjectIndustrialSchemeInputModel model)
+        public IActionResult CreateScheme()
+        {
+            var viewModel = new SRSObjectIndustrialSchemeInputModel();
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> CreateScheme(SRSObjectIndustrialSchemeInputModel model, int id)
         {
             try
             {
@@ -95,13 +107,19 @@
                     return this.View(model);
                 }
 
+                if (model.Hour.Hours > 24 || model.Hour.Hours < 0)
+                {
+                    this.ModelState.AddModelError(string.Empty, "Please fill Correctly Hour field!");
+                    return this.View(model);
+                }
+
                 var user = await this.userManager.GetUserAsync(this.User);
 
-                await this.srsObjectIndustrialService.CreateSchemeAsync(model, user.Id);
+                await this.srsObjectIndustrialService.CreateSchemeAsync(model, id, user.Id);
 
-                this.TempData["Message"] = "Schema was added successfully.";
+                this.TempData["Message"] = "Scheme was added successfully.";
 
-                return this.RedirectToAction("AllSchemes", new { id = model.SrsobjectIndustrialId });
+                return this.RedirectToAction("AllSchemes", new { id });
             }
             catch (Exception ex)
             {
@@ -112,14 +130,20 @@
 
         public IActionResult AllSchemes(int id)
         {
-            var viewModel = new SRSObjectIndustrialSchemeListViewModel
+            try
             {
-                SRSObjectIndustrialSchemes = this.srsObjectIndustrialService.GetAllSchemesBySrsObjectIndustrialId(id),
-            };
-            return this.View(viewModel);
+                var viewModel = new SRSObjectIndustrialSchemeListViewModel
+                {
+                    Id = id,
+                    SRSObjectIndustrialSchemes = this.srsObjectIndustrialService.GetAllSchemesBySrsObjectIndustrialId(id),
+                };
+                return this.View(viewModel);
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                return this.View();
+            }
         }
-
-        //CreateSchemaAsync
-        //GetAllSchemesBySrsObjectIndustrialId
     }
 }

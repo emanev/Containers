@@ -1,6 +1,6 @@
-﻿@model Containers.Web.ViewModels.SRSObjects.Industrial.SRSObjectIndustrialListViewModel
+﻿@model Containers.Web.ViewModels.SRSObjects.Industrial.SRSObjectIndustrialSchemeListViewModel
 @{
-    this.ViewData["Title"] = "All SRS Industrial Objects";   //, page " + Model.PageNumber;
+    this.ViewData["Title"] = "All Schemes";   //, page " + Model.PageNumber;
 }
 
 @if (this.TempData.ContainsKey("Message"))
@@ -15,30 +15,25 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>ContactPerson</th>
-                <th>Note</th>
                 <th>EntryDate</th>
-                <th>DistrictName</th>
-                <th></th>
+                <th>WeekDay</th>                               
+                <th>Hour</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var srsObjectIndustrial in this.Model.SRSObjectIndustrials)
+            @foreach (var scheme in this.Model.SRSObjectIndustrialSchemes)
             {
                 <tr>
-                    <td>@srsObjectIndustrial.Name</td>
-                    <td>@srsObjectIndustrial.Address</td>
-                    <td>@srsObjectIndustrial.ContactPerson</td>
-                    <td>@srsObjectIndustrial.Note</td>
-                    <td>@srsObjectIndustrial.EntryDate</td>
-                    <td>@srsObjectIndustrial.DistrictName</td>
-                    <td><a asp-action="Details" asp-route-id="@srsObjectIndustrial.Id">Details</a></td>
+                    <td>@scheme.EntryDate</td>
+                    <td>@scheme.WeekDay</td>
+                    <td>@scheme.Hour</td>
                 </tr>
             }
         </tbody>
     </table>
+</div>
+<div>
+    <a asp-action="Details" asp-route-id="@Model.Id">Back to DetailsList</a>
 </div>
 
 <hr />

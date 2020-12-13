@@ -4,6 +4,8 @@
 
     public class SRSObjectIndustrialSchemeListViewModel
     {
+        public int Id { get; set; }
+
         public IEnumerable<SRSObjectIndustrialSchemeViewModel> SRSObjectIndustrialSchemes { get; set; }
     }
 }

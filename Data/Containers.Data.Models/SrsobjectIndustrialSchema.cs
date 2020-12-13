@@ -12,7 +12,7 @@
 
         public byte WeekDay { get; set; }
 
-        public byte[] Hour { get; set; }
+        public TimeSpan Hour { get; set; }
 
         public virtual SrsobjectIndustrial SrsobjectIndustrial { get; set; }
 

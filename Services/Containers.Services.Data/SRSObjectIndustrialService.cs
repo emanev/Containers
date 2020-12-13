@@ -77,13 +77,13 @@
             await this.srsObjectIndurstiralRepository.SaveChangesAsync();
         }
 
-        public async Task CreateSchemeAsync(SRSObjectIndustrialSchemeInputModel input, string userId)
+        public async Task CreateSchemeAsync(SRSObjectIndustrialSchemeInputModel input, int id, string userId)
         {
             var schema = new SrsobjectIndustrialSchema
             {
-                SrsobjectIndustrialId = input.SrsobjectIndustrialId,
+                SrsobjectIndustrialId = id,
                 EntryDate = input.EntryDate,
-                WeekDay = input.WeekDay,
+                WeekDay = (byte)input.WeekDay,
                 Hour = input.Hour,
                 AddedByUserId = userId,
             };
@@ -95,11 +95,11 @@
         public IEnumerable<SRSObjectIndustrialSchemeViewModel> GetAllSchemesBySrsObjectIndustrialId(int id)
         {
             var schemes = this.srsObjectIndurstiralSchemaRepository.AllAsNoTracking()
-                .Where(x => x.Id == id)
+                .Where(x => x.SrsobjectIndustrialId == id)
                  .Select(x => new SRSObjectIndustrialSchemeViewModel
                  {
                      EntryDate = x.EntryDate,
-                     WeekDay = x.WeekDay,
+                     WeekDay = (Weekday)x.WeekDay,
                      Hour = x.Hour,
                      UserId = x.AddedByUserId,
                  }).ToList();

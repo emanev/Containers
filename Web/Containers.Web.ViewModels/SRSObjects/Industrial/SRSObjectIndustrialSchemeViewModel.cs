@@ -8,9 +8,9 @@
 
         public DateTime? EntryDate { get; set; }
 
-        public byte WeekDay { get; set; }
+        public Weekday WeekDay { get; set; }
 
-        public byte[] Hour { get; set; }
+        public TimeSpan Hour { get; set; }
 
         public string UserId { get; set; }
     }
