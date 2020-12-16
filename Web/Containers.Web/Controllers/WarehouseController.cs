@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-
+    using Containers.Common;
     using Containers.Data.Models;
     using Containers.Services.Data;
     using Containers.Web.ViewModels.Warehouses;
@@ -77,7 +77,50 @@
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult Edit(int id)
+        {
+            var model = this.warehouseService.GetById(id);
+            model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
+            return this.View(model);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> Edit(int id, WarehouseInputModel model)
+        {
+            try
+            {
+                if (!this.ModelState.IsValid)
+                {
+                    model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
+                    return this.View(model);
+                }
+
+                if (model.DistrictId == 0)
+                {
+                    model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
+                    this.ModelState.AddModelError(string.Empty, "Please fill districts!");
+                    return this.View(model);
+                }
+
+                var user = await this.userManager.GetUserAsync(this.User);
+
+                await this.warehouseService.UpdateAsync(id, model);
+
+                this.TempData["Message"] = "Warehouse edited successfully.";
+
+                return this.RedirectToAction("All");
+            }
+            catch (Exception ex)
+            {
+                this.ModelState.AddModelError(string.Empty, ex.Message);
+                model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
+                return this.View(model);
+            }
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult Delete(int id)
         {
             var container = this.warehouseService.GetById(id);
@@ -87,6 +130,7 @@
         [HttpPost]
         [ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await this.warehouseService.DeleteAsync(id);
