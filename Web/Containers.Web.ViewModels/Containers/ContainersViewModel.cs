@@ -17,5 +17,7 @@
         public Enums.ContainerColour ContainerColour { get; set; }
 
         public Enums.ContainerCapacity ContainerCapacity { get; set; }
+
+        public string ContainerCapacityDisplayName { get; set; }
     }
 }

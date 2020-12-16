@@ -80,7 +80,8 @@
                 ContainerColour = (Enums.ContainerColour)x.ContainerColourId,
                 ContainerCapacityId = x.ContainerCapacityId,
                 ContainerCapacity = (Enums.ContainerCapacity)x.ContainerCapacityId,
-            }).ToList();
+                ContainerCapacityDisplayName = ((Enums.ContainerCapacity)x.ContainerCapacityId).GetDisplayName(),
+            }).ToList();           
 
             return containers;
         }
