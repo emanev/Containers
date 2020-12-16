@@ -30,13 +30,15 @@
     </div>
     <div class="form-group">
         <label asp-for="WarehouseItems"></label>
-        <select asp-for="WarehouseItems" class="form-control single-select" singe="single" id="warehouseddl"               
-                asp-items="warehouseItems"><option value="0">--- Please choose ---</option></select>
+        <select asp-for="WarehouseItems" class="form-control single-select" singe="single" id="warehouseddl"
+                asp-items="warehouseItems">
+            <option value="0">--- Please choose ---</option>
+        </select>
         <span asp-validation-for="WarehouseItems" class="text-danger"></span>
     </div>
     <input type="hidden" id="hiddenTab" name="hiddenTab" />
     @Html.HiddenFor(model => model.WarehouseToId, new { id = "hiddenWarehouse" })
-    <input type="submit" class="btn btn-primary" />
+    <input type="submit" class="btn btn-primary" />    
 </form>
 
 @section Scripts {

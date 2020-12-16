@@ -12,6 +12,10 @@
 <hr />
 
 <div class="container">
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <a class="btn btn-primary" asp-area="" asp-controller="SRSObjectIndustrial" asp-action="Create">Create SRS Object Industrial</a>
+    }
     <table class="table table-striped">
         <thead>
             <tr>
@@ -27,15 +31,15 @@
         <tbody>
             @foreach (var srsObjectIndustrial in this.Model.SRSObjectIndustrials)
             {
-            <tr>
-                <td>@srsObjectIndustrial.Name</td>
-                <td>@srsObjectIndustrial.Address</td>
-                <td>@srsObjectIndustrial.ContactPerson</td>
-                <td>@srsObjectIndustrial.Note</td>
-                <td>@srsObjectIndustrial.EntryDate</td>
-                <td>@srsObjectIndustrial.DistrictName</td>
-                <td><a asp-action="Details" asp-route-id="@srsObjectIndustrial.Id">Details</a></td>
-            </tr>
+                <tr>
+                    <td>@srsObjectIndustrial.Name</td>
+                    <td>@srsObjectIndustrial.Address</td>
+                    <td>@srsObjectIndustrial.ContactPerson</td>
+                    <td>@srsObjectIndustrial.Note</td>
+                    <td>@srsObjectIndustrial.EntryDate</td>
+                    <td>@srsObjectIndustrial.DistrictName</td>
+                    <td><a asp-action="Details" asp-route-id="@srsObjectIndustrial.Id">Details</a></td>
+                </tr>
             }
         </tbody>
     </table>

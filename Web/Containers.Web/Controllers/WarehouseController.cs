@@ -77,6 +77,7 @@
             }
         }
 
+        [Authorize]
         public IActionResult Delete(int id)
         {
             var container = this.warehouseService.GetById(id);
@@ -90,64 +91,6 @@
         {
             await this.warehouseService.DeleteAsync(id);
             return this.RedirectToAction(nameof(this.All));
-        }
-
-        [HttpPut]
-        public IActionResult Details(WarehouseViewModel model)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                //TODO: return error
-            }
-
-            return this.View("Details", model);
-        }
-
-        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public IActionResult Edit(int id)
-        {
-            var model = this.warehouseService.GetById(id);
-            model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
-            return this.View(model);
-        }
-
-        [HttpPost]
-        //[Authorize(Roles = GlobalConstants.AdministratorRoleName)]
-        public async Task<IActionResult> Edit(int id, WarehouseInputModel model)
-        {
-            try
-            {
-                if (!this.ModelState.IsValid)
-                {
-                    model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
-                    return this.View(model);
-                }
-
-                if (model.DistrictId == 0)
-                {
-                    model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
-                    this.ModelState.AddModelError(string.Empty, "Please fill districts!");
-                    return this.View(model);
-                }
-
-                var user = await this.userManager.GetUserAsync(this.User);
-
-                await this.warehouseService.UpdateAsync(id, model);
-
-                this.TempData["Message"] = "Warehouse edited successfully.";
-
-                //return this.RedirectToAction(nameof(this.Edit), new { id });
-
-                return this.RedirectToAction("All");
-
-                //return this.RedirectToAction(nameof(this.ById), new { id });
-            }
-            catch (Exception ex)
-            {
-                this.ModelState.AddModelError(string.Empty, ex.Message);
-                model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
-                return this.View(model);
-            }
         }
     }
 }

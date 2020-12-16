@@ -5,12 +5,13 @@
 
     using Containers.Data.Models;
     using Containers.Services.Data;
+    using Containers.Web.Areas.Administration.Controllers;
     using Containers.Web.ViewModels.Containers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
 
-    public class ContainersController : BaseController
+    public class ContainersController : AdministrationController
     {
         private readonly IContainersService containersService;
         private readonly IWarehouseService warehouseService;
