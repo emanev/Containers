@@ -74,6 +74,7 @@
             services.AddTransient<ISRSObjectIndustrialService, SRSObjectIndustrialService>();
             services.AddTransient<IContainersService, ContainersService>();
             services.AddTransient<IDistrictsService, DistrictsService>();
+            services.AddTransient<IGetCountsService, GetCountsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
