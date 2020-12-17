@@ -23,7 +23,6 @@
             var warehouse = new Warehouse
             {
                 DistrictId = input.DistrictId,
-                CityId = 1, // input.CityId,
                 Address = input.Address,
                 ContactPerson = input.ContactPerson,
                 Name = input.Name,
@@ -43,7 +42,6 @@
                 {
                     Id = x.Id,
                     DistrictName = x.District.Name,
-                    CityName = x.City.Name,
                     Address = x.Address,
                     ContactPerson = x.ContactPerson,
                     Name = x.Name,
@@ -65,9 +63,7 @@
                      Name = x.Name,
                      Email = x.Email,
                      Phone = x.Phone,
-                     CityId = x.CityId,
                      DistrictId = x.DistrictId,
-                     CityName = x.City.Name,
                      DistrictName = x.District.Name,
                  })
                 .FirstOrDefault();
@@ -80,7 +76,6 @@
             var warehouse = this.warehousesRepository.All().FirstOrDefault(x => x.Id == id);
             warehouse.Name = input.Name;
             warehouse.DistrictId = input.DistrictId;
-            warehouse.CityId = 1; // input.CityId;
             warehouse.Address = input.Address;
             warehouse.Email = input.Email;
             warehouse.Phone = input.Phone;

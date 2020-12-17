@@ -15,8 +15,6 @@
 
         public int SrsobjectId { get; set; }
 
-        public int CityId { get; set; }
-
         public int DistrictId { get; set; }
 
         public TimeSpan RaiseTimeFrom { get; set; }

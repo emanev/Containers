@@ -24,8 +24,6 @@
         {
         }
 
-        public DbSet<City> Cities { get; set; }
-
         public DbSet<District> Districts { get; set; }
 
         public DbSet<Movement> Movements { get; set; }

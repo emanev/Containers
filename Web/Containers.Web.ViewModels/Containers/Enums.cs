@@ -6,17 +6,17 @@
     {
         public enum ContainerColour
         {
-            Зелен = 1,
-            Жълт = 2,
-            Син = 3,
+            Green = 1,
+            Yello = 2,
+            Blue = 3,
         }
 
         public enum ContainerCapacity
         {
-            [Display(Name = "1700 литра")]
-            _1700Литра = 1,
-            [Display(Name = "3300 литра")]
-            _3300Литра = 2,
+            [Display(Name = "1700 liters")]
+            _1700Liters = 1,
+            [Display(Name = "3300 liters")]
+            _3300Liters = 2,
         }
     }
 }

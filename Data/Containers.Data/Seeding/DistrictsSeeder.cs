@@ -15,10 +15,16 @@
                 return;
             }
 
-            await dbContext.Districts.AddAsync(new District { Name = "София" });
-            await dbContext.Districts.AddAsync(new District { Name = "Пловдив" });
-            await dbContext.Districts.AddAsync(new District { Name = "Варна" });
-            await dbContext.Districts.AddAsync(new District { Name = "Бургас" });
+            await dbContext.Districts.AddAsync(new District { Name = "Sofia" });
+            await dbContext.Districts.AddAsync(new District { Name = "Plovdiv" });
+            await dbContext.Districts.AddAsync(new District { Name = "Varna" });
+            await dbContext.Districts.AddAsync(new District { Name = "Burgas" });
+            await dbContext.Districts.AddAsync(new District { Name = "Stara Zagora" });
+            await dbContext.Districts.AddAsync(new District { Name = "Ruse" });
+            await dbContext.Districts.AddAsync(new District { Name = "Sliven" });
+            await dbContext.Districts.AddAsync(new District { Name = "Pleven" });
+            await dbContext.Districts.AddAsync(new District { Name = "Dobrich" });
+            await dbContext.Districts.AddAsync(new District { Name = "Veliko Tyrnovo" });
 
             await dbContext.SaveChangesAsync();
         }

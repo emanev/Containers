@@ -6,6 +6,6 @@
 
         public const string AdministratorRoleName = "Administrator";
 
-        public const string SRSObjectIndustrialName = "СРС Индустрия";
+        public const string SRSObjectIndustrialName = "SRS Industry";
     }
 }

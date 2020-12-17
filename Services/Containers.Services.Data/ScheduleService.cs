@@ -66,7 +66,6 @@
                 RaiseTimeTo = input.RaiseTimeTo,
                 ObjectTypeId = (int)input.ObjectType,
                 DistrictId = input.DistrictId,
-                CityId = 1,
             };
 
             await this.schedulesRepository.AddAsync(schedule);
