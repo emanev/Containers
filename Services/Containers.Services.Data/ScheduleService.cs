@@ -27,10 +27,10 @@
                     Id = x.Id,
                     Description = x.Description,
                     RaiseDate = x.RaiseDate,
+                    DistrictName = x.District.Name,
                     RaiseTimeFrom = x.RaiseTimeFrom,
                     RaiseTimeTo = x.RaiseTimeTo,
                     ObjectType = (ObjectType)x.ObjectTypeId,
-                    SrsobjectName = x.Srsobject.Name,
                 }).ToList();
 
             return schedules;
@@ -48,7 +48,6 @@
                      RaiseTimeFrom = x.RaiseTimeFrom,
                      RaiseTimeTo = x.RaiseTimeTo,
                      ObjectType = (ObjectType)x.ObjectTypeId,
-                     SrsobjectName = x.Srsobject.Name,
                  })
                 .FirstOrDefault();
 
@@ -59,7 +58,6 @@
         {
             var schedule = new Schedule
             {
-                SrsobjectId = input.SrsobjectId,
                 Description = input.Description,
                 RaiseDate = input.RaiseDate,
                 RaiseTimeFrom = input.RaiseTimeFrom,

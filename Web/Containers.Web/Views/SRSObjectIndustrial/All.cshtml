@@ -24,7 +24,7 @@
                 <th>Contact Person</th>
                 <th>Note</th>
                 <th>Entry Date</th>
-                <th>District Name</th>
+                <th>District</th>
                 <th></th>
             </tr>
         </thead>
@@ -38,7 +38,10 @@
                     <td>@srsObjectIndustrial.Note</td>
                     <td>@srsObjectIndustrial.EntryDate</td>
                     <td>@srsObjectIndustrial.DistrictName</td>
-                    <td><a asp-action="Details" asp-route-id="@srsObjectIndustrial.Id">Details</a></td>
+                    @if (this.User.Identity.IsAuthenticated)
+                    {
+                        <td><a asp-action="Details" asp-route-id="@srsObjectIndustrial.Id">Details</a></td>
+                    }
                 </tr>
             }
         </tbody>

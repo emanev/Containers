@@ -12,8 +12,6 @@
 
         public DateTime RaiseDate { get; set; }
 
-        public int SrsobjectId { get; set; }
-
         public int DistrictId { get; set; }
 
         public TimeSpan RaiseTimeFrom { get; set; }
@@ -23,7 +21,5 @@
         public virtual District District { get; set; }
 
         public virtual ObjectType ObjectType { get; set; }
-
-        public virtual SrsobjectIndustrial Srsobject { get; set; }
     }
 }

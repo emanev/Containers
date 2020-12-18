@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
 
-    public class ScheduleListViewModel// : PagingViewModel
+    public class ScheduleListViewModel
     {
         public IEnumerable<ScheduleViewModel> Schedules { get; set; }
     }

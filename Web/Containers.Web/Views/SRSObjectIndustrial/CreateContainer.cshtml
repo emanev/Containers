@@ -17,7 +17,9 @@
         </div>
         <input type="hidden" id="hiddenTab" name="hiddenTab" />
         @Html.HiddenFor(model => model.ContainerId, new { id = "hiddenContainer" })
+        <br>
         <input type="submit" class="btn btn-primary" />
+        <br>
         <div>
             <a asp-action="AllContainers" asp-route-id="@Model.SrsobjectIndustrialId">All containers</a>
         </div>

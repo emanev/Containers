@@ -71,9 +71,10 @@
         {
             try
             {
+                model.WarehouseItems = this.warehouseService.GetAllAsKeyValuePairs();
+
                 if (!this.ModelState.IsValid)
                 {
-                    model.WarehouseItems = this.warehouseService.GetAllAsKeyValuePairs();
                     return this.View(model);
                 }
 

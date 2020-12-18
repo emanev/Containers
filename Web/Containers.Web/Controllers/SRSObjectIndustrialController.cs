@@ -110,9 +110,9 @@
                     return this.View(model);
                 }
 
-                if (model.Hour.Hours > 24 || model.Hour.Hours < 0)
+                if (model.Hour.Hours < 8 || model.Hour.Hours > 19)
                 {
-                    this.ModelState.AddModelError(string.Empty, "Please fill Correctly Hour field!");
+                    this.ModelState.AddModelError(string.Empty, "Hour must be between 8 and 19!");
                     return this.View(model);
                 }
 

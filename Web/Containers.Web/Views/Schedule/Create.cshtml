@@ -1,7 +1,6 @@
 ﻿@model Containers.Web.ViewModels.Schedules.ScheduleInputModel
 @{
-    var districtItems = this.Model.DistrictItems.Select(x => new SelectListItem(x.Value, x.Key));
-    var srsObjectIndustrialItems = this.Model.SrsObjectIndustrialItems.Select(x => new SelectListItem(x.Value, x.Key));
+    var districtItems = this.Model.DistrictItems.Select(x => new SelectListItem(x.Value, x.Key));   
 }
 
 <h1>Add schedule</h1>
@@ -24,7 +23,7 @@
     </div>
     <div class="form-group">
         <label asp-for="RaiseDate"></label>
-        <input asp-for="RaiseDate" class="form-control" />
+        <input asp-for="RaiseDate" type="date" class="form-control" />
         <span asp-validation-for="RaiseDate" class="text-danger"></span>
     </div>
     <div class="form-group">
@@ -45,16 +44,7 @@
         </select>
         <span asp-validation-for="DistrictItems" class="text-danger"></span>
     </div>    
-    @Html.HiddenFor(model => model.DistrictId, new { id = "hiddenDistrict" })
-    <div class="form-group">
-        <label asp-for="SrsObjectIndustrialItems">SrsObjectIndustrials</label>
-        <select asp-for="SrsObjectIndustrialItems" class="form-control single-select" singe="single" id="srsObjectddl"
-                asp-items="srsObjectIndustrialItems">
-            <option value="0">--- Please choose ---</option>
-        </select>
-        <span asp-validation-for="SrsObjectIndustrialItems" class="text-danger"></span>
-    </div>    
-    @Html.HiddenFor(model => model.SrsobjectId, new { id = "hiddenSRSObject" })
+    @Html.HiddenFor(model => model.DistrictId, new { id = "hiddenDistrict" })    
     <input type="submit" class="btn btn-primary" />
 </form>
 
@@ -67,11 +57,6 @@
     $("#districtddl").on('change',function(){
         var getValue = $(this).val();
         $("input[id=hiddenDistrict]:hidden").val(getValue);        
-    });
-
-    $("#srsObjectddl").on('change',function(){
-        var getValue = $(this).val();
-        $("input[id=hiddenSRSObject]:hidden").val(getValue);       
     });
 
     </script>

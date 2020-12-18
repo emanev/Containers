@@ -55,7 +55,6 @@
         {
             var model = new ScheduleInputModel();
             model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
-            model.SrsObjectIndustrialItems = this.srsObjectIndustrialService.GetAllAsKeyValuePairs();
             return this.View(model);
         }
 
@@ -66,7 +65,6 @@
             try
             {
                 model.DistrictItems = this.districtService.GetAllAsKeyValuePairs();
-                model.SrsObjectIndustrialItems = this.srsObjectIndustrialService.GetAllAsKeyValuePairs();
 
                 if (!this.ModelState.IsValid)
                 {
@@ -94,12 +92,6 @@
                 if (model.DistrictId == 0)
                 {
                     this.ModelState.AddModelError(string.Empty, "Please fill districts!");
-                    return this.View(model);
-                }
-
-                if (model.SrsobjectId == 0)
-                {
-                    this.ModelState.AddModelError(string.Empty, "Please fill SRS Objects!");
                     return this.View(model);
                 }
 

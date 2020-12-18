@@ -10,19 +10,19 @@
     <h1>@this.ViewData["Title"]</h1>
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="InventarNumber"></label>
+        <label asp-for="InventarNumber">Inventar Number</label>
         <input asp-for="InventarNumber" class="form-control" />
         <span asp-validation-for="InventarNumber" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="ContainerColour"></label>
+        <label asp-for="ContainerColour">Container Colour</label>
         <select asp-for="ContainerColour" class="form-control"
                 asp-items="@Html.GetEnumSelectList<Containers.Web.ViewModels.Containers.Enums.ContainerColour>()">
         </select>
         <span asp-validation-for="ContainerColour" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="ContainerCapacity"></label>
+        <label asp-for="ContainerCapacity">Container Capacity</label>
         <select asp-for="ContainerCapacity" class="form-control"
                 asp-items="@Html.GetEnumSelectList<Containers.Web.ViewModels.Containers.Enums.ContainerCapacity>()">
         </select>

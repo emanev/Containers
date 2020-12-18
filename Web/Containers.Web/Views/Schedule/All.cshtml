@@ -1,6 +1,6 @@
 ﻿@model Containers.Web.ViewModels.Schedules.ScheduleListViewModel
 @{
-    this.ViewData["Title"] = "All schedules";   //, page " + Model.PageNumber;
+    this.ViewData["Title"] = "All schedules";
 }
 
 @if (this.TempData.ContainsKey("Message"))
@@ -21,8 +21,7 @@
             <tr>
                 <th>Description</th>
                 <th>Object Type</th>
-                <th>Raise Date</th>
-                <th>SRS Object Name</th>
+                <th>Raise Date</th>                
                 <th>District Name</th>
                 <th>Raise Time From</th>
                 <th>Raise Time To</th>               
@@ -34,8 +33,7 @@
                 <tr>
                     <td>@schedule.Description</td>
                     <td>@schedule.ObjectType</td>
-                    <td>@schedule.RaiseDate</td>
-                    <td>@schedule.SrsobjectName</td>
+                    <td>@schedule.RaiseDate</td>                    
                     <td>@schedule.DistrictName</td>
                     <td>@schedule.RaiseTimeFrom</td>
                     <td>@schedule.RaiseTimeTo</td>                    

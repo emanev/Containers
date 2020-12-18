@@ -9,7 +9,6 @@
     {
         public SrsobjectIndustrial()
         {
-            this.Schedule = new HashSet<Schedule>();
             this.SrsobjectIndustrialContainer = new HashSet<SrsobjectIndustrialContainer>();
             this.SrsobjectIndustrialSchema = new HashSet<SrsobjectIndustrialSchema>();
         }
@@ -31,8 +30,6 @@
         public string AddedByUserId { get; set; }
 
         public virtual ApplicationUser AddedByUser { get; set; }
-
-        public virtual ICollection<Schedule> Schedule { get; set; }
 
         public virtual ICollection<SrsobjectIndustrialContainer> SrsobjectIndustrialContainer { get; set; }
 
