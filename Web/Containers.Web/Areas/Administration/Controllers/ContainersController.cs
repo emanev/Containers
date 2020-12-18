@@ -78,13 +78,13 @@
                 }
 
                 if (model.WarehouseToId == 0)
-                {                    
+                {
                     this.ModelState.AddModelError(string.Empty, "Please fill warehouses!");
                     return this.View(model);
                 }
 
                 if (!this.containersService.IsUniqueContainer(model))
-                {                    
+                {
                     this.ModelState.AddModelError(string.Empty, "Inventar number is not unique!");
                     return this.View(model);
                 }

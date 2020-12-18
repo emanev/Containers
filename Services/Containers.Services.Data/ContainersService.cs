@@ -84,7 +84,11 @@
 
         public IEnumerable<ContainersViewModel> GetAll()
         {
+            var industrialContainersIds = this.srsObjectIndurstiralContainerRepository.AllAsNoTracking()
+                .Select(x => x.ContainerId).ToList();
+
             var containers = this.containersRepository.AllAsNoTracking()
+                .Where(x => !industrialContainersIds.Contains(x.Id))
                 .Select(x => new ContainersViewModel
             {
                 Id = x.Id,
@@ -94,7 +98,7 @@
                 ContainerCapacityId = x.ContainerCapacityId,
                 ContainerCapacity = (Enums.ContainerCapacity)x.ContainerCapacityId,
                 ContainerCapacityDisplayName = ((Enums.ContainerCapacity)x.ContainerCapacityId).GetDisplayName(),
-            }).ToList();           
+            }).ToList();
 
             return containers;
         }
