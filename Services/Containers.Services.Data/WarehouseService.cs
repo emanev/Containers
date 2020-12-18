@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     using Containers.Common;
     using Containers.Data.Common.Repositories;
     using Containers.Data.Models;
@@ -12,10 +13,14 @@
     public class WarehouseService : IWarehouseService
     {
         private readonly IDeletableEntityRepository<Warehouse> warehousesRepository;
+        private readonly IRepository<Movement> movementsRepository;
 
-        public WarehouseService(IDeletableEntityRepository<Warehouse> warehousesRepository)
+        public WarehouseService(
+            IDeletableEntityRepository<Warehouse> warehousesRepository,
+            IRepository<Movement> movementsRepository)
         {
             this.warehousesRepository = warehousesRepository;
+            this.movementsRepository = movementsRepository;
         }
 
         public async Task CreateAsync(WarehouseInputModel input, string userId)
@@ -86,6 +91,14 @@
 
         public async Task DeleteAsync(int id)
         {
+            var movements = this.movementsRepository.All().Where(x => x.WarehouseId == id);
+            foreach (var movement in movements)
+            {
+                this.movementsRepository.Delete(movement);
+            }
+
+            await this.movementsRepository.SaveChangesAsync();
+
             var warehouse = this.warehousesRepository.All().FirstOrDefault(x => x.Id == id);
             this.warehousesRepository.Delete(warehouse);
             await this.warehousesRepository.SaveChangesAsync();
