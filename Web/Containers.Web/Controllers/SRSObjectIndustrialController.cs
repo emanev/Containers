@@ -150,10 +150,11 @@
         }
 
         [Authorize]
-        public IActionResult CreateContainer()
+        public IActionResult CreateContainer(int id)
         {
             var model = new SRSObjectIndustrialContainerInputModel();
             model.ContainerItems = this.containerService.GetAllAsKeyValuePairs();
+            model.SrsobjectIndustrialId = id;
             return this.View(model);
         }
 
@@ -172,6 +173,7 @@
                 if (model.ContainerId == 0)
                 {
                     model.ContainerItems = this.containerService.GetAllAsKeyValuePairs();
+                    model.SrsobjectIndustrialId = id;
                     this.ModelState.AddModelError(string.Empty, "Please choose container!");
                     return this.View(model);
                 }
