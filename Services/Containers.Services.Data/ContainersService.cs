@@ -44,8 +44,7 @@
                 var movement = new Movement
                 {
                     ContainerId = containerId,
-                    WarehouseFromId = null,
-                    WarehouseToId = input.WarehouseToId,
+                    WarehouseId = input.WarehouseToId,
                     IsLastMovement = true,
                     AddedByUserId = userId,
                     EntryDate = null,
@@ -58,6 +57,20 @@
             {
                 Console.WriteLine(ex);
             }
+        }
+
+        public bool IsUniqueContainer(ContainersInputModel input)
+        {
+            var result = this.containersRepository.AllAsNoTracking()
+                                .Where(x => x.InventarNumber == input.InventarNumber)
+                                .FirstOrDefault();
+
+            if (result != null)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         public async Task UpdateAsync(int id, ContainersInputModel input)

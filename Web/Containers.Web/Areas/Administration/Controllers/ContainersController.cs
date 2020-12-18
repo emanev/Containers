@@ -78,15 +78,22 @@
                 }
 
                 if (model.WarehouseToId == 0)
-                {
-                    model.WarehouseItems = this.warehouseService.GetAllAsKeyValuePairs();
+                {                    
                     this.ModelState.AddModelError(string.Empty, "Please fill warehouses!");
+                    return this.View(model);
+                }
+
+                if (!this.containersService.IsUniqueContainer(model))
+                {                    
+                    this.ModelState.AddModelError(string.Empty, "Inventar number is not unique!");
                     return this.View(model);
                 }
 
                 var user = await this.userManager.GetUserAsync(this.User);
 
                 await this.containersService.CreateAsync(model, user.Id);
+
+                this.TempData["Message"] = "Container was added successfully.";
 
                 return this.RedirectToAction("All");
             }

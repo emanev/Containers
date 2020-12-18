@@ -38,6 +38,7 @@
         public IEnumerable<WarehouseViewModel> GetAll()
         {
             var warehouses = this.warehousesRepository.AllAsNoTracking()
+                .Where(x => x.Name != GlobalConstants.SRSObjectIndustrialName)
                 .Select(x => new WarehouseViewModel
                 {
                     Id = x.Id,
@@ -63,7 +64,7 @@
                      Name = x.Name,
                      Email = x.Email,
                      Phone = x.Phone,
-                     DistrictId = x.DistrictId,
+                     DistrictId = x.DistrictId.Value,
                      DistrictName = x.District.Name,
                  })
                 .FirstOrDefault();

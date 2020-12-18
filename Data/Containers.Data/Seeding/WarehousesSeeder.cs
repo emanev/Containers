@@ -17,7 +17,7 @@
             }
 
             await dbContext.Warehouses.AddAsync(
-                new Warehouse { Name = GlobalConstants.SRSObjectIndustrialName, DistrictId = 1, IsDeleted = false });
+                new Warehouse { Name = GlobalConstants.SRSObjectIndustrialName, IsDeleted = false });
 
             await dbContext.SaveChangesAsync();
         }

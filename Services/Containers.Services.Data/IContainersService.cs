@@ -16,5 +16,7 @@
         Task DeleteAsync(int id);
 
         IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
+
+        bool IsUniqueContainer(ContainersInputModel input);
     }
 }

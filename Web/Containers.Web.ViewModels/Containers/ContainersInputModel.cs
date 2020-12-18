@@ -12,7 +12,6 @@
         public string InventarNumber { get; set; }
 
         [EnumDataType(typeof(Enums.ContainerColour))]
-        //[Display(Name = "Colour Type:")]
         public Enums.ContainerColour ContainerColour { get; set; }
 
         [EnumDataType(typeof(Enums.ContainerCapacity))]

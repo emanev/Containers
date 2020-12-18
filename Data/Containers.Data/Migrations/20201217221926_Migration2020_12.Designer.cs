@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Containers.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201212210251_Migration12122020_1")]
-    partial class Migration12122020_1
+    [Migration("20201217221926_Migration2020_12")]
+    partial class Migration2020_12
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,24 +141,6 @@ namespace Containers.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Containers.Data.Models.City", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("DistrictId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cities");
-                });
-
             modelBuilder.Entity("Containers.Data.Models.Container", b =>
                 {
                     b.Property<int>("Id")
@@ -228,16 +210,7 @@ namespace Containers.Data.Migrations
                     b.Property<bool>("IsLastMovement")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("WarehouseFromId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WarehouseId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("WarehouseId1")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WarehouseToId")
+                    b.Property<int>("WarehouseId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -247,8 +220,6 @@ namespace Containers.Data.Migrations
                     b.HasIndex("ContainerId");
 
                     b.HasIndex("WarehouseId");
-
-                    b.HasIndex("WarehouseId1");
 
                     b.ToTable("Movements");
                 });
@@ -274,9 +245,6 @@ namespace Containers.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -312,8 +280,6 @@ namespace Containers.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("DistrictId");
 
@@ -513,9 +479,6 @@ namespace Containers.Data.Migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ContactPerson")
                         .HasColumnType("nvarchar(max)");
 
@@ -546,8 +509,6 @@ namespace Containers.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AddedByUserId");
-
-                    b.HasIndex("CityId");
 
                     b.HasIndex("DistrictId");
 
@@ -673,22 +634,14 @@ namespace Containers.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Containers.Data.Models.Warehouse", null)
-                        .WithMany("MovementWarehouseFrom")
-                        .HasForeignKey("WarehouseId");
-
-                    b.HasOne("Containers.Data.Models.Warehouse", null)
-                        .WithMany("MovementWarehouseTo")
-                        .HasForeignKey("WarehouseId1");
+                        .WithMany("MovementWarehouse")
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Containers.Data.Models.Schedule", b =>
                 {
-                    b.HasOne("Containers.Data.Models.City", "City")
-                        .WithMany("Schedule")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Containers.Data.Models.District", "District")
                         .WithMany("Schedule")
                         .HasForeignKey("DistrictId")
@@ -764,12 +717,6 @@ namespace Containers.Data.Migrations
                     b.HasOne("Containers.Data.Models.ApplicationUser", "AddedByUser")
                         .WithMany()
                         .HasForeignKey("AddedByUserId");
-
-                    b.HasOne("Containers.Data.Models.City", "City")
-                        .WithMany("Warehouse")
-                        .HasForeignKey("CityId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
 
                     b.HasOne("Containers.Data.Models.District", "District")
                         .WithMany("Warehouse")

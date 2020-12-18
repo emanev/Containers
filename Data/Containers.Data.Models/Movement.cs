@@ -16,9 +16,7 @@
 
         public int ContainerId { get; set; }
 
-        public int WarehouseToId { get; set; }
-
-        public int? WarehouseFromId { get; set; }
+        public int WarehouseId { get; set; }
 
         public bool IsLastMovement { get; set; }
 

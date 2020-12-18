@@ -27,7 +27,7 @@
                           {
                               new RolesSeeder(),
                               new SettingsSeeder(),
-                              new DistrictsSeeder(),                              
+                              new DistrictsSeeder(),
                               new ObjectTypesSeeder(),
                               new WarehousesSeeder(),
                           };

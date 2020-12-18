@@ -136,8 +136,7 @@
             var movement = new Movement
             {
                 ContainerId = input.ContainerId,
-                WarehouseFromId = lastContainerMovement.WarehouseToId,
-                WarehouseToId = srsObjectIndustrialId,
+                WarehouseId = srsObjectIndustrialId,
                 IsLastMovement = true,
                 EntryDate = DateTime.UtcNow,
                 AddedByUserId = userId,

@@ -4,14 +4,16 @@ using Containers.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Containers.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201217215646_Migration2020_11")]
+    partial class Migration2020_11
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -208,7 +210,16 @@ namespace Containers.Data.Migrations
                     b.Property<bool>("IsLastMovement")
                         .HasColumnType("bit");
 
-                    b.Property<int>("WarehouseId")
+                    b.Property<int?>("WarehouseFromId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WarehouseId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("WarehouseId1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WarehouseToId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -218,6 +229,8 @@ namespace Containers.Data.Migrations
                     b.HasIndex("ContainerId");
 
                     b.HasIndex("WarehouseId");
+
+                    b.HasIndex("WarehouseId1");
 
                     b.ToTable("Movements");
                 });
@@ -486,7 +499,7 @@ namespace Containers.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DistrictId")
+                    b.Property<int>("DistrictId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -632,10 +645,12 @@ namespace Containers.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("Containers.Data.Models.Warehouse", null)
-                        .WithMany("MovementWarehouse")
-                        .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .WithMany("MovementWarehouseFrom")
+                        .HasForeignKey("WarehouseId");
+
+                    b.HasOne("Containers.Data.Models.Warehouse", null)
+                        .WithMany("MovementWarehouseTo")
+                        .HasForeignKey("WarehouseId1");
                 });
 
             modelBuilder.Entity("Containers.Data.Models.Schedule", b =>
@@ -718,7 +733,9 @@ namespace Containers.Data.Migrations
 
                     b.HasOne("Containers.Data.Models.District", "District")
                         .WithMany("Warehouse")
-                        .HasForeignKey("DistrictId");
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

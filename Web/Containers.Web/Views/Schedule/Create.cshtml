@@ -38,7 +38,7 @@
         <span asp-validation-for="RaiseTimeTo" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <label asp-for="DistrictItems"></label>
+        <label asp-for="DistrictItems">Districts</label>
         <select asp-for="DistrictItems" class="form-control single-select" singe="single" id="districtddl"
                 asp-items="districtItems">
             <option value="0">--- Please choose ---</option>
@@ -47,7 +47,7 @@
     </div>    
     @Html.HiddenFor(model => model.DistrictId, new { id = "hiddenDistrict" })
     <div class="form-group">
-        <label asp-for="SrsObjectIndustrialItems"></label>
+        <label asp-for="SrsObjectIndustrialItems">SrsObjectIndustrials</label>
         <select asp-for="SrsObjectIndustrialItems" class="form-control single-select" singe="single" id="srsObjectddl"
                 asp-items="srsObjectIndustrialItems">
             <option value="0">--- Please choose ---</option>

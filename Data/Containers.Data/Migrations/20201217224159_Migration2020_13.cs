@@ -2,7 +2,7 @@
 
 namespace Containers.Data.Migrations
 {
-    public partial class Migration12122020_1 : Migration
+    public partial class Migration2020_13 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

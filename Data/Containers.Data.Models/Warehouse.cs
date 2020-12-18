@@ -8,8 +8,7 @@
     {
         public Warehouse()
         {
-            this.MovementWarehouseFrom = new HashSet<Movement>();
-            this.MovementWarehouseTo = new HashSet<Movement>();
+            this.MovementWarehouse = new HashSet<Movement>();
         }
 
         public string Name { get; set; }
@@ -22,7 +21,7 @@
 
         public string Phone { get; set; }
 
-        public int DistrictId { get; set; }
+        public int? DistrictId { get; set; }
 
         public virtual District District { get; set; }
 
@@ -30,8 +29,6 @@
 
         public virtual ApplicationUser AddedByUser { get; set; }
 
-        public virtual ICollection<Movement> MovementWarehouseFrom { get; set; }
-
-        public virtual ICollection<Movement> MovementWarehouseTo { get; set; }
+        public virtual ICollection<Movement> MovementWarehouse { get; set; }
     }
 }
