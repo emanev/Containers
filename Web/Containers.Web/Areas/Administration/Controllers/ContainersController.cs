@@ -27,16 +27,6 @@
             this.userManager = userManager;
         }
 
-        public IActionResult All()
-        {
-            var viewModel = new ContainersListViewModel
-            {
-                Containers = this.containersService.GetAll(),
-            };
-            return this.View(viewModel);
-        }
-
-        // Containers/All/8
         public IActionResult All(int id = 1)
         {
             if (id <= 0)
@@ -44,7 +34,7 @@
                 return this.NotFound();
             }
 
-            const int ItemsPerPage = 12;
+            const int ItemsPerPage = 5;
             var viewModel = new ContainersListViewModel
             {
                 ItemsPerPage = ItemsPerPage,
