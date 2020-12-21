@@ -103,6 +103,30 @@
             return containers;
         }
 
+        public IEnumerable<ContainersViewModel> GetAll(int page, int itemsPerPage = 12)
+        {
+            var containers = this.containersRepository.AllAsNoTracking()
+                .OrderByDescending(x => x.Id)
+                .Skip((page - 1) * itemsPerPage).Take(itemsPerPage)
+                .Select(x => new ContainersViewModel
+                {
+                    Id = x.Id,
+                    InventarNumber = x.InventarNumber,
+                    ContainerColourId = x.ContainerColourId,
+                    ContainerColour = (Enums.ContainerColour)x.ContainerColourId,
+                    ContainerCapacityId = x.ContainerCapacityId,
+                    ContainerCapacity = (Enums.ContainerCapacity)x.ContainerCapacityId,
+                    ContainerCapacityDisplayName = ((Enums.ContainerCapacity)x.ContainerCapacityId).GetDisplayName(),
+                }).ToList();
+
+            return containers;
+        }
+
+        public int GetCount()
+        {
+            return this.containersRepository.All().Count();
+        }
+
         public ContainersViewModel GetById(int id)
         {
             var container = this.containersRepository.AllAsNoTracking()

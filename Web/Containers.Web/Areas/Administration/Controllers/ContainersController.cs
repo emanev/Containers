@@ -36,6 +36,25 @@
             return this.View(viewModel);
         }
 
+        // Containers/All/8
+        public IActionResult All(int id = 1)
+        {
+            if (id <= 0)
+            {
+                return this.NotFound();
+            }
+
+            const int ItemsPerPage = 12;
+            var viewModel = new ContainersListViewModel
+            {
+                ItemsPerPage = ItemsPerPage,
+                PageNumber = id,
+                ContainersCount = this.containersService.GetCount(),
+                Containers = this.containersService.GetAll(id, ItemsPerPage),
+            };
+            return this.View(viewModel);
+        }
+
         public IActionResult ById(int id)
         {
             var container = this.containersService.GetById(id);

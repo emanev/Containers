@@ -1,6 +1,6 @@
 ﻿@model Containers.Web.ViewModels.Containers.ContainersListViewModel
 @{
-    this.ViewData["Title"] = "All free containers";
+    this.ViewData["Title"] = "All free containers, page " + Model.PageNumber;
 }
 
 @if (this.TempData.ContainsKey("Message"))
